@@ -1,0 +1,3 @@
+class VkTools::Pages
+  # Your code goes here...
+end
