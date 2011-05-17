@@ -1,12 +1,8 @@
-require 'net/http'
-require "net/https"
-require 'json'
-require 'digest/md5'
-
 class VkTools::Api
 
-  def initialize(params)
+  def initialize(params = {})
     @access_token = params[:access_token]
+
     @service_name = params[:service_name] || "VkApi"
     @service_address = params[:service_address] || "api.vkontakte.ru"
     @service_path = params[:service_path] || "/method"
@@ -96,6 +92,7 @@ class VkTools::Api
       resp, data = http.get(path)
       unless resp.code_type == Net::HTTPOK
 #        logger.error("Bad response from #{@service_address}: #{resp.code}")
+ap "Bad response from #{@service_address}: #{resp.code}"
         return
       end
 
@@ -105,6 +102,7 @@ class VkTools::Api
       attributes.keys.each do |key|
         if key.to_s =~ /.*error.*/
 #          logger.error("#{@service_name} request error: #{attributes[key].inspect}")
+ap "#{@service_name} request error: #{attributes[key].inspect}"
           return
         end
       end if Hash === attributes
