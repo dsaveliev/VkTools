@@ -29,4 +29,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency("capybara")
   s.add_development_dependency("rcov")
   s.add_development_dependency("yard")
+  s.add_development_dependency("fakeweb")
 end

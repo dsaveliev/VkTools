@@ -12,7 +12,7 @@ class VkTools::Api
   end
 
   def to_hash
-    { :access_token => @params[:access_token] }
+    { :access_token => @access_token }
   end
 
   def method_missing(method, *args)
@@ -24,7 +24,7 @@ class VkTools::Api
       response = send_request
       return response if response
     rescue Exception => exc
-#      logger.error("#{@service_name} method call error: #{exc.message}")
+      logger.error("#{@service_name} method call error: #{exc.message}")
       super
     end
   end
@@ -91,8 +91,7 @@ class VkTools::Api
       path = "#{@service_path}?#{query_string}"
       resp, data = http.get(path)
       unless resp.code_type == Net::HTTPOK
-#        logger.error("Bad response from #{@service_address}: #{resp.code}")
-ap "Bad response from #{@service_address}: #{resp.code}"
+        logger.error("Bad response from #{@service_address}: #{resp.code}")
         return
       end
 
@@ -101,8 +100,7 @@ ap "Bad response from #{@service_address}: #{resp.code}"
 
       attributes.keys.each do |key|
         if key.to_s =~ /.*error.*/
-#          logger.error("#{@service_name} request error: #{attributes[key].inspect}")
-ap "#{@service_name} request error: #{attributes[key].inspect}"
+          logger.error("#{@service_name} request error: #{attributes[key].inspect}")
           return
         end
       end if Hash === attributes
