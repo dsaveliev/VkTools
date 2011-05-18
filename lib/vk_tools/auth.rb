@@ -19,7 +19,6 @@ module VkTools::Auth
 
       path = "http://api.vkontakte.ru/oauth/authorize?client_id=#{VkTools.client_id}&redirect_uri=#{redirect_uri}&display=wap&scope=16383&response_type=code"
       agent = Mechanize.new
-
       page = agent.get(path)      
       form = page.forms.first
       if !!form 
@@ -52,12 +51,10 @@ module VkTools::Auth
 
         begin
           resp, data = http.post(path, data, headers)
-          
           unless resp.code_type == Net::HTTPOK
             logger.error("Bad response from api.vk.com: #{resp.code}")
             return
           end
-
           attributes = JSON.parse(data)
 
           if attributes.has_key?("error")

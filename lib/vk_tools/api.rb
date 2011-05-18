@@ -89,12 +89,12 @@ class VkTools::Api
       http = Net::HTTP.new(@service_address, @service_port)
       http.use_ssl = @use_ssl
       path = "#{@service_path}?#{query_string}"
+
       resp, data = http.get(path)
       unless resp.code_type == Net::HTTPOK
         logger.error("Bad response from #{@service_address}: #{resp.code}")
         return
       end
-
       return data unless data =~ /^[\{|\[].*[\}|\]]$/
       attributes = JSON.parse(data)
 
