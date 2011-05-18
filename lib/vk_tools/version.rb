@@ -1,3 +1,4 @@
 module VkTools
-  VERSION = "0.2.0"
+  # Текущая версия
+  VERSION = "0.2.5"
 end

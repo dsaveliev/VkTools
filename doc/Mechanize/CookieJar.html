@@ -1,0 +1,404 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Class: Mechanize::CookieJar</title>
+<link rel="stylesheet" href="../css/style.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '..';
+  if (relpath != '') relpath += '/';
+</script>
+<script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../_index.html">Index (C)</a> &raquo; 
+    <span class='title'><span class='object_link'><a href="../Mechanize.html" title="Mechanize (class)">Mechanize</a></span></span>
+     &raquo; 
+    <span class="title">CookieJar</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  <a id="class_list_link" href="#">Class List</a>
+  <a id="method_list_link" href="#">Method List</a>
+  <a id ="file_list_link" href="#">File List</a>
+</div>
+
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Class: Mechanize::CookieJar
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Mechanize::CookieJar</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+  
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">lib/patch/mechanize.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>
+Патч Mechanize для чтения/записи куков
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div>
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#dump_cookies-instance_method" title="#dump_cookies (instance method)">- (String) <strong>dump_cookies</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Сохранение cookies.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#load_cookies-instance_method" title="#load_cookies (instance method)">- (Object) <strong>load_cookies</strong>(text) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Загрузка cookies в mechanize.
+</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="dump_cookies-instance_method">
+  
+    - (<tt>String</tt>) <strong>dump_cookies</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Сохранение cookies
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+возврщает cookies в виде строки
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/patch/mechanize.rb', line 7</span>
+
+<span class='def def kw'>def</span> <span class='dump_cookies identifier id'>dump_cookies</span>
+  <span class='result identifier id'>result</span> <span class='assign token'>=</span> <span class='string val'>&quot;&quot;</span>
+  <span class='to_a identifier id'>to_a</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='cookie identifier id'>cookie</span><span class='bitor op'>|</span>
+    <span class='fields identifier id'>fields</span> <span class='assign token'>=</span> <span class='lbrack token'>[</span><span class='rbrack token'>]</span>
+    <span class='fields identifier id'>fields</span><span class='lbrack token'>[</span><span class='integer val'>0</span><span class='rbrack token'>]</span> <span class='assign token'>=</span> <span class='cookie identifier id'>cookie</span><span class='dot token'>.</span><span class='domain identifier id'>domain</span>
+
+    <span class='if if kw'>if</span> <span class='cookie identifier id'>cookie</span><span class='dot token'>.</span><span class='domain identifier id'>domain</span> <span class='match op'>=~</span> <span class='regexp val'>/^\./</span>
+      <span class='fields identifier id'>fields</span><span class='lbrack token'>[</span><span class='integer val'>1</span><span class='rbrack token'>]</span> <span class='assign token'>=</span> <span class='string val'>&quot;TRUE&quot;</span>
+    <span class='else else kw'>else</span>
+      <span class='fields identifier id'>fields</span><span class='lbrack token'>[</span><span class='integer val'>1</span><span class='rbrack token'>]</span> <span class='assign token'>=</span> <span class='string val'>&quot;FALSE&quot;</span>
+    <span class='end end kw'>end</span>
+
+    <span class='fields identifier id'>fields</span><span class='lbrack token'>[</span><span class='integer val'>2</span><span class='rbrack token'>]</span> <span class='assign token'>=</span> <span class='cookie identifier id'>cookie</span><span class='dot token'>.</span><span class='path identifier id'>path</span>
+
+    <span class='if if kw'>if</span> <span class='cookie identifier id'>cookie</span><span class='dot token'>.</span><span class='secure identifier id'>secure</span> <span class='eq op'>==</span> <span class='true true kw'>true</span>
+      <span class='fields identifier id'>fields</span><span class='lbrack token'>[</span><span class='integer val'>3</span><span class='rbrack token'>]</span> <span class='assign token'>=</span> <span class='string val'>&quot;TRUE&quot;</span>
+    <span class='else else kw'>else</span>
+      <span class='fields identifier id'>fields</span><span class='lbrack token'>[</span><span class='integer val'>3</span><span class='rbrack token'>]</span> <span class='assign token'>=</span> <span class='string val'>&quot;FALSE&quot;</span>
+    <span class='end end kw'>end</span>
+
+    <span class='fields identifier id'>fields</span><span class='lbrack token'>[</span><span class='integer val'>4</span><span class='rbrack token'>]</span> <span class='assign token'>=</span> <span class='cookie identifier id'>cookie</span><span class='dot token'>.</span><span class='expires identifier id'>expires</span><span class='dot token'>.</span><span class='to_i identifier id'>to_i</span><span class='dot token'>.</span><span class='to_s identifier id'>to_s</span>
+
+    <span class='fields identifier id'>fields</span><span class='lbrack token'>[</span><span class='integer val'>5</span><span class='rbrack token'>]</span> <span class='assign token'>=</span> <span class='cookie identifier id'>cookie</span><span class='dot token'>.</span><span class='name identifier id'>name</span>
+    <span class='fields identifier id'>fields</span><span class='lbrack token'>[</span><span class='integer val'>6</span><span class='rbrack token'>]</span> <span class='assign token'>=</span> <span class='cookie identifier id'>cookie</span><span class='dot token'>.</span><span class='value identifier id'>value</span>
+    <span class='result identifier id'>result</span> <span class='lshft op'>&lt;&lt;</span> <span class='fields identifier id'>fields</span><span class='dot token'>.</span><span class='join identifier id'>join</span><span class='lparen token'>(</span><span class='string val'>&quot;\t&quot;</span><span class='rparen token'>)</span> <span class='plus op'>+</span> <span class='string val'>&quot;\n&quot;</span>
+  <span class='end end kw'>end</span>
+  <span class='result identifier id'>result</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="load_cookies-instance_method">
+  
+    - (<tt>Object</tt>) <strong>load_cookies</strong>(text) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Загрузка cookies в mechanize
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+        <span class='name'>cookies</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+в виде строки
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/patch/mechanize.rb', line 38</span>
+
+<span class='def def kw'>def</span> <span class='load_cookies identifier id'>load_cookies</span><span class='lparen token'>(</span><span class='text identifier id'>text</span><span class='rparen token'>)</span>
+  <span class='now identifier id'>now</span> <span class='assign token'>=</span> <span class='Time constant id'>Time</span><span class='dot token'>.</span><span class='now identifier id'>now</span>
+  <span class='fakeuri identifier id'>fakeuri</span> <span class='assign token'>=</span> <span class='Struct constant id'>Struct</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='symbol val'>:host</span><span class='rparen token'>)</span>    <span class='comment val'># add_cookie wants something resembling a URI.</span>
+
+  <span class='text identifier id'>text</span><span class='dot token'>.</span><span class='each_line identifier id'>each_line</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='line identifier id'>line</span><span class='bitor op'>|</span>
+    <span class='line identifier id'>line</span><span class='dot token'>.</span><span class='chomp! fid id'>chomp!</span>
+    <span class='line identifier id'>line</span><span class='dot token'>.</span><span class='gsub! fid id'>gsub!</span><span class='lparen token'>(</span><span class='regexp val'>/#.+/</span><span class='comma token'>,</span> <span class='string val'>''</span><span class='rparen token'>)</span>
+    <span class='fields identifier id'>fields</span> <span class='assign token'>=</span> <span class='line identifier id'>line</span><span class='dot token'>.</span><span class='split identifier id'>split</span><span class='lparen token'>(</span><span class='string val'>&quot;\t&quot;</span><span class='rparen token'>)</span>
+
+    <span class='next next kw'>next</span> <span class='if if_mod kw'>if</span> <span class='fields identifier id'>fields</span><span class='dot token'>.</span><span class='length identifier id'>length</span> <span class='neq op'>!=</span> <span class='integer val'>7</span>
+
+    <span class='expires_seconds identifier id'>expires_seconds</span> <span class='assign token'>=</span> <span class='fields identifier id'>fields</span><span class='lbrack token'>[</span><span class='integer val'>4</span><span class='rbrack token'>]</span><span class='dot token'>.</span><span class='to_i identifier id'>to_i</span>
+    <span class='begin begin kw'>begin</span>
+      <span class='expires identifier id'>expires</span> <span class='assign token'>=</span> <span class='lparen token'>(</span><span class='expires_seconds identifier id'>expires_seconds</span> <span class='eq op'>==</span> <span class='integer val'>0</span><span class='rparen token'>)</span> <span class='question op'>?</span> <span class='nil nil kw'>nil</span> <span class='colon op'>:</span> <span class='Time constant id'>Time</span><span class='dot token'>.</span><span class='at identifier id'>at</span><span class='lparen token'>(</span><span class='expires_seconds identifier id'>expires_seconds</span><span class='rparen token'>)</span>
+    <span class='rescue rescue kw'>rescue</span>
+      <span class='next next kw'>next</span>
+      <span class='comment val'># Just in case we ever decide to support DateTime...</span>
+      <span class='comment val'># expires = DateTime.new(1970,1,1) + ((expires_seconds + 1) / (60*60*24.0))</span>
+    <span class='end end kw'>end</span>
+    <span class='next next kw'>next</span> <span class='if if_mod kw'>if</span> <span class='lparen token'>(</span><span class='expires_seconds identifier id'>expires_seconds</span> <span class='neq op'>!=</span> <span class='integer val'>0</span><span class='rparen token'>)</span> <span class='andop op'>&amp;&amp;</span> <span class='lparen token'>(</span><span class='expires identifier id'>expires</span> <span class='lt op'>&lt;</span> <span class='now identifier id'>now</span><span class='rparen token'>)</span>
+
+    <span class='c identifier id'>c</span> <span class='assign token'>=</span> <span class='Mechanize constant id'>Mechanize</span><span class='colon2 op'>::</span><span class='Cookie constant id'>Cookie</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='fields identifier id'>fields</span><span class='lbrack token'>[</span><span class='integer val'>5</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='fields identifier id'>fields</span><span class='lbrack token'>[</span><span class='integer val'>6</span><span class='rbrack token'>]</span><span class='rparen token'>)</span>
+    <span class='c identifier id'>c</span><span class='dot token'>.</span><span class='domain identifier id'>domain</span> <span class='assign token'>=</span> <span class='fields identifier id'>fields</span><span class='lbrack token'>[</span><span class='integer val'>0</span><span class='rbrack token'>]</span>
+    <span class='comment val'># Field 1 indicates whether the cookie can be read by other machines at the same domain.</span>
+    <span class='comment val'># This is computed by the cookie implementation, based on the domain value.</span>
+    <span class='c identifier id'>c</span><span class='dot token'>.</span><span class='path identifier id'>path</span> <span class='assign token'>=</span> <span class='fields identifier id'>fields</span><span class='lbrack token'>[</span><span class='integer val'>2</span><span class='rbrack token'>]</span>               <span class='comment val'># Path for which the cookie is relevant</span>
+    <span class='c identifier id'>c</span><span class='dot token'>.</span><span class='secure identifier id'>secure</span> <span class='assign token'>=</span> <span class='lparen token'>(</span><span class='fields identifier id'>fields</span><span class='lbrack token'>[</span><span class='integer val'>3</span><span class='rbrack token'>]</span> <span class='eq op'>==</span> <span class='string val'>&quot;TRUE&quot;</span><span class='rparen token'>)</span> <span class='comment val'># Requires a secure connection</span>
+    <span class='c identifier id'>c</span><span class='dot token'>.</span><span class='expires identifier id'>expires</span> <span class='assign token'>=</span> <span class='expires identifier id'>expires</span>             <span class='comment val'># Time the cookie expires.</span>
+    <span class='c identifier id'>c</span><span class='dot token'>.</span><span class='version identifier id'>version</span> <span class='assign token'>=</span> <span class='integer val'>0</span>                   <span class='comment val'># Conforms to Netscape cookie spec.</span>
+
+    <span class='add identifier id'>add</span><span class='lparen token'>(</span><span class='fakeuri identifier id'>fakeuri</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='c identifier id'>c</span><span class='dot token'>.</span><span class='domain identifier id'>domain</span><span class='rparen token'>)</span><span class='comma token'>,</span> <span class='c identifier id'>c</span><span class='rparen token'>)</span>
+  <span class='end end kw'>end</span>
+  <span class='@jar ivar id'>@jar</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+    
+    <div id="footer">
+  Generated on Wed May 18 18:07:21 2011 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.6.8 (ruby-1.8.7).
+</div>
+
+  </body>
+</html>

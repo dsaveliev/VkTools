@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>VkTools API Documentation</title>
+<link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '';
+  if (relpath != '') relpath += '/';
+</script>
+<script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="_index.html" title="Index">Index</a> &raquo; 
+    <span class="title">File: README</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  <a id="class_list_link" href="#">Class List</a>
+  <a id="method_list_link" href="#">Method List</a>
+  <a id ="file_list_link" href="#">File List</a>
+</div>
+
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><div id='filecontents'><h1>Классы для взаимодействия с RestApi vkontakte.ru:</h1>
+
+<h2>Установка</h2>
+
+<p>Прописать путь к джему в Gemfile</p>
+
+<pre class="code"><span class='gem identifier id'>gem</span> <span class='string val'>'vk_tools'</span><span class='comma token'>,</span> <span class='symbol val'>:git</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='string val'>'git@funbox.beanstalkapp.com:/vk_api.git'</span>
+</pre>
+
+<h2>Примеры использования:</h2>
+
+<h4>Авторизация</h4>
+
+<pre class="code"><span class='VkTools constant id'>VkTools</span><span class='dot token'>.</span><span class='client_id identifier id'>client_id</span> <span class='assign token'>=</span> <span class='string val'>&quot;1234567&quot;</span>
+<span class='VkTools constant id'>VkTools</span><span class='dot token'>.</span><span class='client_secret identifier id'>client_secret</span> <span class='assign token'>=</span> <span class='string val'>&quot;QWERTYUIOASDFGHJKLS&quot;</span>
+
+<span class='VkTools constant id'>VkTools</span><span class='dot token'>.</span><span class='authorize identifier id'>authorize</span><span class='lparen token'>(</span><span class='string val'>&quot;login&quot;</span><span class='comma token'>,</span> <span class='string val'>&quot;password&quot;</span><span class='rparen token'>)</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='api identifier id'>api</span><span class='comma token'>,</span> <span class='pages identifier id'>pages</span><span class='bitor op'>|</span>
+  <span class='user_id identifier id'>user_id</span> <span class='assign token'>=</span> <span class='api identifier id'>api</span><span class='dot token'>.</span><span class='getUserInfo identifier id'>getUserInfo</span><span class='lbrack token'>[</span><span class='symbol val'>:user_id</span><span class='rbrack token'>]</span>
+  <span class='page identifier id'>page</span> <span class='assign token'>=</span> <span class='pages identifier id'>pages</span><span class='dot token'>.</span><span class='get identifier id'>get</span><span class='lparen token'>(</span><span class='string val'>'http://m.vkontakte.ru'</span><span class='rparen token'>)</span>
+  <span class='access_token identifier id'>access_token</span> <span class='assign token'>=</span> <span class='api identifier id'>api</span><span class='dot token'>.</span><span class='to_hash identifier id'>to_hash</span><span class='lbrack token'>[</span><span class='symbol val'>:access_token</span><span class='rbrack token'>]</span>
+  <span class='cookie identifier id'>cookie</span> <span class='assign token'>=</span> <span class='pages identifier id'>pages</span><span class='dot token'>.</span><span class='to_hash identifier id'>to_hash</span><span class='lbrack token'>[</span><span class='symbol val'>:cookie</span><span class='rbrack token'>]</span>
+<span class='end end kw'>end</span>
+</pre>
+
+<h4>Альтернативный способ</h4>
+
+<pre class="code"><span class='VkTools constant id'>VkTools</span><span class='dot token'>.</span><span class='client_id identifier id'>client_id</span> <span class='assign token'>=</span> <span class='string val'>&quot;1234567&quot;</span>
+<span class='VkTools constant id'>VkTools</span><span class='dot token'>.</span><span class='client_secret identifier id'>client_secret</span> <span class='assign token'>=</span> <span class='string val'>&quot;QWERTYUIOASDFGHJKLS&quot;</span>
+
+<span class='api identifier id'>api</span><span class='comma token'>,</span> <span class='pages identifier id'>pages</span> <span class='assign token'>=</span> <span class='VkTools constant id'>VkTools</span><span class='dot token'>.</span><span class='authorize identifier id'>authorize</span><span class='lparen token'>(</span><span class='string val'>&quot;login&quot;</span><span class='comma token'>,</span> <span class='string val'>&quot;password&quot;</span><span class='rparen token'>)</span>
+</pre>
+
+<h4>Логирование</h4>
+
+<p>Логирование можно подключить следующим образом:</p>
+
+<pre class="code"><span class='Vktools constant id'>Vktools</span><span class='dot token'>.</span><span class='logger identifier id'>logger</span> <span class='assign token'>=</span> <span class='Rails constant id'>Rails</span><span class='dot token'>.</span><span class='logger identifier id'>logger</span>
+</pre></div></div>
+    
+    <div id="footer">
+  Generated on Wed May 18 18:07:20 2011 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.6.8 (ruby-1.8.7).
+</div>
+
+  </body>
+</html>

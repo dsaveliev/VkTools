@@ -1,0 +1,7 @@
+lib/vk_tools/auth.rb b008df03f4861f05f70a4f530d7fcaa2d81a0917
+lib/vk_tools/api.rb 2e77c47670ad211ea151fe3ebc3cf163da38ec65
+lib/vk_tools/base.rb 305e888b0b69a1b8dc047308496479c60c0b2167
+lib/patch/mechanize.rb 355370aedb10d8664dad9c7c2e6167f03c9fd049
+lib/vk_tools/pages.rb 656efb3a8398dc9fd785215c4d3456111d1b1445
+lib/vk_tools/version.rb 798957e42eb375da7471b491d4903f60ba20f2e8
+lib/vk_tools.rb 7d3527dd62013007efd7417a0a9f942fdd956cc6

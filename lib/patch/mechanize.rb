@@ -1,6 +1,9 @@
+# Патч Mechanize для чтения/записи cookies
 class Mechanize
+  # Патч Mechanize для чтения/записи куков
   class CookieJar
-   
+    # Сохранение cookies
+    # @return [String] возврщает cookies в виде строки
     def dump_cookies
       result = ""
       to_a.each do |cookie|
@@ -30,6 +33,8 @@ class Mechanize
       result
     end
     
+    # Загрузка cookies в mechanize
+    # @param [String] cookies в виде строки
     def load_cookies(text)
       now = Time.now
       fakeuri = Struct.new(:host)    # add_cookie wants something resembling a URI.

@@ -1,8 +1,12 @@
+# @author Dmitry Savelev
+# Класс реализует обертку для вызова методов rest api контакта
 class VkTools::Api
+  include VkTools::Base
 
+  # @param [Hash] params хэш параметров
+  # @note :access_token - обязательный параметр
   def initialize(params = {})
     @access_token = params[:access_token]
-
     @service_name = params[:service_name] || "VkApi"
     @service_address = params[:service_address] || "api.vkontakte.ru"
     @service_path = params[:service_path] || "/method"
@@ -11,10 +15,15 @@ class VkTools::Api
     @method_as_param = params[:method_as_param] || false
   end
 
+  # Возвращение хэша с токеном
+  # @return [Hash] возврщает хэш с токеном (:access_token)
   def to_hash
     { :access_token => @access_token }
   end
 
+  # Динамический вызов методов rest api контакта: 
+  # {http://vkontakte.ru/developers.php?o=-1&p=%CE%EF%E8%F1%E0%ED%E8%E5%20%EC%E5%F2%EE%E4%EE%E2%20API}
+  # @return [Hash] возврщает хэш с результатами
   def method_missing(method, *args)
     begin
       initialise_params
@@ -24,7 +33,7 @@ class VkTools::Api
       response = send_request
       return response if response
     rescue Exception => exc
-      logger.error("#{@service_name} method call error: #{exc.message}")
+      log_exception(exc)
       super
     end
   end
@@ -92,7 +101,7 @@ class VkTools::Api
 
       resp, data = http.get(path)
       unless resp.code_type == Net::HTTPOK
-        logger.error("Bad response from #{@service_address}: #{resp.code}")
+        log_exception("Bad response from #{@service_address}: #{resp.code}")
         return
       end
       return data unless data =~ /^[\{|\[].*[\}|\]]$/
@@ -100,7 +109,7 @@ class VkTools::Api
 
       attributes.keys.each do |key|
         if key.to_s =~ /.*error.*/
-          logger.error("#{@service_name} request error: #{attributes[key].inspect}")
+          log_exception("#{@service_name} request error: #{attributes[key].inspect}")
           return
         end
       end if Hash === attributes

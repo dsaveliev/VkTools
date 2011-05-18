@@ -1,0 +1,484 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Module: VkTools::Auth::ClassMethods</title>
+<link rel="stylesheet" href="../../css/style.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="../../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '../..';
+  if (relpath != '') relpath += '/';
+</script>
+<script type="text/javascript" charset="utf-8" src="../../js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../js/app.js"></script>
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../../_index.html">Index (C)</a> &raquo; 
+    <span class='title'><span class='object_link'><a href="../../VkTools.html" title="VkTools (module)">VkTools</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Auth.html" title="VkTools::Auth (module)">Auth</a></span></span>
+     &raquo; 
+    <span class="title">ClassMethods</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  <a id="class_list_link" href="#">Class List</a>
+  <a id="method_list_link" href="#">Method List</a>
+  <a id ="file_list_link" href="#">File List</a>
+</div>
+
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Module: VkTools::Auth::ClassMethods
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+  
+    
+  
+    
+      <dt class="r1">Includes:</dt>
+      <dd class="r1"><span class='object_link'><a href="../Base.html" title="VkTools::Base (module)">Base</a></span></dd>
+      
+    
+  
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">lib/vk_tools/auth.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>
+Модуль добавляет в VkTools методы класса
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Author:</h3>
+<ul class="author">
+  
+    <li>
+      
+      
+      
+      
+        
+        <div class='inline'><p>
+Dmitry Savelev
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+
+  
+  
+  
+  
+  <h2>Instance Attribute Summary <small>(<a href="#" class="summary_toggle">collapse</a>)</small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#client_id-instance_method" title="#client_id (instance method)">- (Object) <strong>client_id</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Client ID приложения vkontakte.ru, через которое
+идут вызовы методов rest api.
+</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#client_secret-instance_method" title="#client_secret (instance method)">- (Object) <strong>client_secret</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Client Secret приложения vkontakte.ru, через которое
+идут вызовы методов rest api.
+</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#logger-instance_method" title="#logger (instance method)">- (Object) <strong>logger</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Атрибут для подключения логгера.
+</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#authorize-instance_method" title="#authorize (instance method)">- (Object) <strong>authorize</strong>(login, password) {|vk_api, vk_pages| ... }</a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Авторизация в vkontakte.ru.
+</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="../Base.html" title="VkTools::Base (module)">Base</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../Base.html#log-instance_method" title="VkTools::Base#log (method)">#log</a></span>, <span class='object_link'><a href="../Base.html#log_exception-instance_method" title="VkTools::Base#log_exception (method)">#log_exception</a></span></p>
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="client_id=-instance_method"></span>
+      <span id="client_id-instance_method"></span>
+      <div class="method_details first">
+  <p class="signature first" id="client_id-instance_method">
+  
+    - (<tt>Object</tt>) <strong>client_id</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Client ID приложения vkontakte.ru, через которое
+идут вызовы методов rest api
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+14
+15
+16</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/vk_tools/auth.rb', line 14</span>
+
+<span class='def def kw'>def</span> <span class='client_id identifier id'>client_id</span>
+  <span class='@client_id ivar id'>@client_id</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="client_secret=-instance_method"></span>
+      <span id="client_secret-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="client_secret-instance_method">
+  
+    - (<tt>Object</tt>) <strong>client_secret</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Client Secret приложения vkontakte.ru, через которое
+идут вызовы методов rest api
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+16
+17
+18</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/vk_tools/auth.rb', line 16</span>
+
+<span class='def def kw'>def</span> <span class='client_secret identifier id'>client_secret</span>
+  <span class='@client_secret ivar id'>@client_secret</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="logger=-instance_method"></span>
+      <span id="logger-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="logger-instance_method">
+  
+    - (<tt>Object</tt>) <strong>logger</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Атрибут для подключения логгера
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+18
+19
+20</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/vk_tools/auth.rb', line 18</span>
+
+<span class='def def kw'>def</span> <span class='logger identifier id'>logger</span>
+  <span class='@logger ivar id'>@logger</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="authorize-instance_method">
+  
+    - (<tt>Object</tt>) <strong>authorize</strong>(login, password) {|vk_api, vk_pages| ... }
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Авторизация в vkontakte.ru
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Yield Parameters:</h3>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Api.html" title="VkTools::Api (class)">VkTools::Api</a></span></tt>)</span>
+      
+      
+        <span class='name'>vk_api</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+обертка для доступа к RestApi
+</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Pages.html" title="VkTools::Pages (class)">VkTools::Pages</a></span></tt>)</span>
+      
+      
+        <span class='name'>vk_pages</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+обертка для доступа к контенту vkontakte.ru
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/vk_tools/auth.rb', line 23</span>
+
+<span class='def def kw'>def</span> <span class='authorize identifier id'>authorize</span><span class='lparen token'>(</span><span class='login identifier id'>login</span><span class='comma token'>,</span> <span class='password identifier id'>password</span><span class='rparen token'>)</span>
+  <span class='auth_data identifier id'>auth_data</span> <span class='assign token'>=</span> <span class='inner_authorize identifier id'>inner_authorize</span><span class='lparen token'>(</span><span class='login identifier id'>login</span><span class='comma token'>,</span> <span class='password identifier id'>password</span><span class='rparen token'>)</span>
+  <span class='vk_api identifier id'>vk_api</span> <span class='assign token'>=</span> <span class='VkTools constant id'>VkTools</span><span class='colon2 op'>::</span><span class='Api constant id'>Api</span><span class='dot token'>.</span><span class='new identifier id'>new</span> <span class='symbol val'>:access_token</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='auth_data identifier id'>auth_data</span><span class='lbrack token'>[</span><span class='symbol val'>:access_token</span><span class='rbrack token'>]</span>
+  <span class='vk_pages identifier id'>vk_pages</span> <span class='assign token'>=</span> <span class='VkTools constant id'>VkTools</span><span class='colon2 op'>::</span><span class='Pages constant id'>Pages</span><span class='dot token'>.</span><span class='new identifier id'>new</span> <span class='symbol val'>:cookie</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='auth_data identifier id'>auth_data</span><span class='lbrack token'>[</span><span class='symbol val'>:cookie</span><span class='rbrack token'>]</span>
+  <span class='if if kw'>if</span> <span class='block_given? fid id'>block_given?</span>
+    <span class='yield yield kw'>yield</span> <span class='vk_api identifier id'>vk_api</span><span class='comma token'>,</span> <span class='vk_pages identifier id'>vk_pages</span> 
+  <span class='else else kw'>else</span>
+    <span class='lbrack token'>[</span><span class='vk_api identifier id'>vk_api</span><span class='comma token'>,</span> <span class='vk_pages identifier id'>vk_pages</span><span class='rbrack token'>]</span>
+  <span class='end end kw'>end</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+    
+    <div id="footer">
+  Generated on Wed May 18 18:07:20 2011 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.6.8 (ruby-1.8.7).
+</div>
+
+  </body>
+</html>
