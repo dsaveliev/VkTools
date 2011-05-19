@@ -61,7 +61,7 @@ class VkTools::Api
       if @method_as_param
         @params[:method] = method.to_s.gsub("_", ".")
       else
-        @full_service_path = "#{@service_path}/#{method.to_s.gsub("_s_", "/").gsub("_d_", ".")}"
+        @full_service_path = "#{@service_path}/#{method.to_s.gsub("_", ".")}"
       end
     end
 

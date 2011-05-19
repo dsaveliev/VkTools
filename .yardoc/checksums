@@ -1,5 +1,5 @@
 lib/vk_tools/auth.rb b008df03f4861f05f70a4f530d7fcaa2d81a0917
-lib/vk_tools/api.rb f87948bf13f321665c44dcf3d8ade25de4cd3b40
+lib/vk_tools/api.rb 3117aad55b56b10704303506d85e91ce85038feb
 lib/vk_tools/base.rb 305e888b0b69a1b8dc047308496479c60c0b2167
 lib/patch/mechanize.rb 355370aedb10d8664dad9c7c2e6167f03c9fd049
 lib/vk_tools/pages.rb 656efb3a8398dc9fd785215c4d3456111d1b1445

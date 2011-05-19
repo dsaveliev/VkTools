@@ -39,6 +39,13 @@
     api = VkTools::Api.new :access_token => some_access_token
     pages = VkTools::Pages.new :cookie => some_cookie
 
+#### Вызовы методов Rest Api
+[Документация](http://vkontakte.ru/developers.php?o=-1&p=%CE%EF%E8%F1%E0%ED%E8%E5%20%EC%E5%F2%EE%E4%EE%E2%20API)
+
+    api = VkTools::Api.new :access_token => some_access_token
+    user_id = api.getUserInfoEx[:user_id]
+    # если в функции присутствует точка - заменяем её на подчеркивание
+    messages_count = api.messages_get[0]
 
 #### Логирование
 
