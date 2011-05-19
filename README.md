@@ -43,9 +43,27 @@
 [Документация](http://vkontakte.ru/developers.php?o=-1&p=%CE%EF%E8%F1%E0%ED%E8%E5%20%EC%E5%F2%EE%E4%EE%E2%20API)
 
     api = VkTools::Api.new :access_token => some_access_token
+
     user_id = api.getUserInfoEx[:user_id]
+
     # если в функции присутствует точка - заменяем её на подчеркивание
     messages_count = api.messages_get[0]
+
+
+#### Получение страниц vkontakte.ru
+
+    pages = VkTools::Pages.new :cookie => some_cookie
+
+    # URL адрес должен быть полным, т.е. начинаться на http://
+    page_1 = pages.get("http://vkontakte.ru")
+
+    # для post запросов нужно передватать хэш параметров
+    page_2 = pages.post(some_url, params)
+
+    # предусмотрены аналогичные методы, возвращающие Mechanize::Page
+    page_3 = pages.mech_get(some_url)
+    page_4 = pages.mech_post(some_url, params)
+
 
 #### Логирование
 

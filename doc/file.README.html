@@ -84,9 +84,26 @@
 <p><a href="http://vkontakte.ru/developers.php?o=-1&amp;p=%CE%EF%E8%F1%E0%ED%E8%E5%20%EC%E5%F2%EE%E4%EE%E2%20API">Документация</a></p>
 
 <pre class="code"><span class='api identifier id'>api</span> <span class='assign token'>=</span> <span class='VkTools constant id'>VkTools</span><span class='colon2 op'>::</span><span class='Api constant id'>Api</span><span class='dot token'>.</span><span class='new identifier id'>new</span> <span class='symbol val'>:access_token</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='some_access_token identifier id'>some_access_token</span>
+
 <span class='user_id identifier id'>user_id</span> <span class='assign token'>=</span> <span class='api identifier id'>api</span><span class='dot token'>.</span><span class='getUserInfoEx identifier id'>getUserInfoEx</span><span class='lbrack token'>[</span><span class='symbol val'>:user_id</span><span class='rbrack token'>]</span>
+
 <span class='comment val'># если в функции присутствует точка - заменяем её на подчеркивание</span>
 <span class='messages_count identifier id'>messages_count</span> <span class='assign token'>=</span> <span class='api identifier id'>api</span><span class='dot token'>.</span><span class='messages_get identifier id'>messages_get</span><span class='lbrack token'>[</span><span class='integer val'>0</span><span class='rbrack token'>]</span>
+</pre>
+
+<h4>Получение страниц vkontakte.ru</h4>
+
+<pre class="code"><span class='pages identifier id'>pages</span> <span class='assign token'>=</span> <span class='VkTools constant id'>VkTools</span><span class='colon2 op'>::</span><span class='Pages constant id'>Pages</span><span class='dot token'>.</span><span class='new identifier id'>new</span> <span class='symbol val'>:cookie</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='some_cookie identifier id'>some_cookie</span>
+
+<span class='comment val'># URL адрес должен быть полным, т.е. начинаться на http://</span>
+<span class='page_1 identifier id'>page_1</span> <span class='assign token'>=</span> <span class='pages identifier id'>pages</span><span class='dot token'>.</span><span class='get identifier id'>get</span><span class='lparen token'>(</span><span class='string val'>&quot;http://vkontakte.ru&quot;</span><span class='rparen token'>)</span>
+
+<span class='comment val'># для post запросов нужно передватать хэш параметров</span>
+<span class='page_2 identifier id'>page_2</span> <span class='assign token'>=</span> <span class='pages identifier id'>pages</span><span class='dot token'>.</span><span class='post identifier id'>post</span><span class='lparen token'>(</span><span class='some_url identifier id'>some_url</span><span class='comma token'>,</span> <span class='params identifier id'>params</span><span class='rparen token'>)</span>
+
+<span class='comment val'># предусмотрены аналогичные методы, возвращающие Mechanize::Page</span>
+<span class='page_3 identifier id'>page_3</span> <span class='assign token'>=</span> <span class='pages identifier id'>pages</span><span class='dot token'>.</span><span class='mech_get identifier id'>mech_get</span><span class='lparen token'>(</span><span class='some_url identifier id'>some_url</span><span class='rparen token'>)</span>
+<span class='page_4 identifier id'>page_4</span> <span class='assign token'>=</span> <span class='pages identifier id'>pages</span><span class='dot token'>.</span><span class='mech_post identifier id'>mech_post</span><span class='lparen token'>(</span><span class='some_url identifier id'>some_url</span><span class='comma token'>,</span> <span class='params identifier id'>params</span><span class='rparen token'>)</span>
 </pre>
 
 <h4>Логирование</h4>
@@ -97,7 +114,7 @@
 </pre></div></div>
     
     <div id="footer">
-  Generated on Thu May 19 12:10:53 2011 by 
+  Generated on Thu May 19 15:50:49 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.6.8 (ruby-1.8.7).
 </div>
