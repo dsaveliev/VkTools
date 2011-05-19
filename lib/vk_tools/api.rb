@@ -61,7 +61,7 @@ class VkTools::Api
       if @method_as_param
         @params[:method] = method.to_s.gsub("_", ".")
       else
-        @service_path = "#{@service_path}/#{method.to_s.gsub("_s_", "/").gsub("_d_", ".")}"
+        @full_service_path = "#{@service_path}/#{method.to_s.gsub("_s_", "/").gsub("_d_", ".")}"
       end
     end
 
@@ -97,13 +97,15 @@ class VkTools::Api
                         join('&')
       http = Net::HTTP.new(@service_address, @service_port)
       http.use_ssl = @use_ssl
-      path = "#{@service_path}?#{query_string}"
+      path = "#{@full_service_path}?#{query_string}"
 
       resp, data = http.get(path)
+
       unless resp.code_type == Net::HTTPOK
         log_exception("Bad response from #{@service_address}: #{resp.code}")
         return
       end
+
       return data unless data =~ /^[\{|\[].*[\}|\]]$/
       attributes = JSON.parse(data)
 
