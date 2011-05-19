@@ -8,7 +8,7 @@ class VkTools::Api
   def initialize(params = {})
     @access_token = params[:access_token]
     @service_name = params[:service_name] || "VkApi"
-    @service_address = params[:service_address] || "api.vkontakte.ru"
+    @service_adress = params[:service_address] || "api.vkontakte.ru"
     @service_path = params[:service_path] || "/method"
     @service_port = params[:service_port] || 443
     @use_ssl = params[:use_ssl] || true
@@ -95,7 +95,7 @@ class VkTools::Api
       query_string = @params.
                         map{|arg| "#{arg[0]}=#{arg[1]}"}.
                         join('&')
-      http = Net::HTTP.new(@service_address, @service_port)
+      http = Net::HTTP.new(@service_adress, @service_port)
       http.use_ssl = @use_ssl
       path = "#{@full_service_path}?#{query_string}"
 
