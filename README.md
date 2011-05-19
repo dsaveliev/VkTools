@@ -34,6 +34,12 @@
     api, pages = VkTools.authorize("login", "password")
 
 
+#### Получение оберток по отдельности
+
+    api = VkTools::Api.new :access_token => some_access_token
+    pages = VkTools::Pages.new :cookie => some_cookie
+
+
 #### Логирование
 
 Логирование можно подключить следующим образом:
