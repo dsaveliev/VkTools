@@ -230,7 +230,7 @@ A new instance of Pages.
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#post-instance_method" title="#post (instance method)">- (String) <strong>post</strong>(path, params) </a>
+      <a href="#post-instance_method" title="#post (instance method)">- (String) <strong>post</strong>(path, params = {}, headers = {}) </a>
     
 
     
@@ -408,7 +408,7 @@ url адрес должен быть полным, т.е.
   
     <li>
       
-        <span class='type'>(<tt>String</tt>)</span>
+        <span class='type'>(<tt>String</tt>, <tt>Hash</tt>)</span>
       
       
         <span class='name'>path</span>
@@ -417,7 +417,8 @@ url адрес должен быть полным, т.е.
       
         &mdash;
         <div class='inline'><p>
-url адрес
+url адрес или расширенные параметры
+запроса (см. Mechanize#new)
 </p>
 </div>
       
@@ -543,12 +544,12 @@ url адрес
       <pre class="lines">
 
 
-38
 39
-40</pre>
+40
+41</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/vk_tools/pages.rb', line 38</span>
+      <pre class="code"><span class="info file"># File 'lib/vk_tools/pages.rb', line 39</span>
 
 <span class='def def kw'>def</span> <span class='mech_get identifier id'>mech_get</span><span class='lparen token'>(</span><span class='path identifier id'>path</span><span class='rparen token'>)</span>
   <span class='@agent ivar id'>@agent</span><span class='dot token'>.</span><span class='get identifier id'>get</span><span class='lparen token'>(</span><span class='path identifier id'>path</span><span class='rparen token'>)</span>
@@ -651,12 +652,12 @@ url адрес
       <pre class="lines">
 
 
-47
 48
-49</pre>
+49
+50</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/vk_tools/pages.rb', line 47</span>
+      <pre class="code"><span class="info file"># File 'lib/vk_tools/pages.rb', line 48</span>
 
 <span class='def def kw'>def</span> <span class='mech_post identifier id'>mech_post</span><span class='lparen token'>(</span><span class='path identifier id'>path</span><span class='comma token'>,</span> <span class='params identifier id'>params</span><span class='rparen token'>)</span>
   <span class='@agent ivar id'>@agent</span><span class='dot token'>.</span><span class='post identifier id'>post</span><span class='lparen token'>(</span><span class='path identifier id'>path</span><span class='comma token'>,</span> <span class='params identifier id'>params</span><span class='rparen token'>)</span>
@@ -670,7 +671,7 @@ url адрес
       <div class="method_details ">
   <p class="signature " id="post-instance_method">
   
-    - (<tt>String</tt>) <strong>post</strong>(path, params) 
+    - (<tt>String</tt>) <strong>post</strong>(path, params = {}, headers = {}) 
   
 
   
@@ -722,10 +723,31 @@ url адрес
         <span class='name'>params</span>
       
       
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
       
         &mdash;
         <div class='inline'><p>
 хэш параметров запроса
+</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <span class='name'>headers</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>
+хэш хедеров
 </p>
 </div>
       
@@ -758,16 +780,16 @@ url адрес
       <pre class="lines">
 
 
-29
 30
 31
-32</pre>
+32
+33</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/vk_tools/pages.rb', line 29</span>
+      <pre class="code"><span class="info file"># File 'lib/vk_tools/pages.rb', line 30</span>
 
-<span class='def def kw'>def</span> <span class='post identifier id'>post</span><span class='lparen token'>(</span><span class='path identifier id'>path</span><span class='comma token'>,</span> <span class='params identifier id'>params</span><span class='rparen token'>)</span>
-  <span class='page identifier id'>page</span> <span class='assign token'>=</span> <span class='@agent ivar id'>@agent</span><span class='dot token'>.</span><span class='post identifier id'>post</span><span class='lparen token'>(</span><span class='path identifier id'>path</span><span class='comma token'>,</span> <span class='params identifier id'>params</span><span class='rparen token'>)</span>
+<span class='def def kw'>def</span> <span class='post identifier id'>post</span><span class='lparen token'>(</span><span class='path identifier id'>path</span><span class='comma token'>,</span> <span class='params identifier id'>params</span><span class='assign token'>=</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='comma token'>,</span> <span class='headers identifier id'>headers</span><span class='assign token'>=</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='rparen token'>)</span>
+  <span class='page identifier id'>page</span> <span class='assign token'>=</span> <span class='@agent ivar id'>@agent</span><span class='dot token'>.</span><span class='post identifier id'>post</span><span class='lparen token'>(</span><span class='path identifier id'>path</span><span class='comma token'>,</span> <span class='params identifier id'>params</span><span class='comma token'>,</span> <span class='headers identifier id'>headers</span><span class='rparen token'>)</span>
   <span class='page identifier id'>page</span><span class='dot token'>.</span><span class='body identifier id'>body</span>
 <span class='end end kw'>end</span>
 </pre>
@@ -819,12 +841,12 @@ url адрес
       <pre class="lines">
 
 
-53
 54
-55</pre>
+55
+56</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/vk_tools/pages.rb', line 53</span>
+      <pre class="code"><span class="info file"># File 'lib/vk_tools/pages.rb', line 54</span>
 
 <span class='def def kw'>def</span> <span class='to_hash identifier id'>to_hash</span>
   <span class='lbrace token'>{</span> <span class='symbol val'>:cookie</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='@cookie_jar ivar id'>@cookie_jar</span><span class='dot token'>.</span><span class='dump_cookies identifier id'>dump_cookies</span> <span class='rbrace token'>}</span>
@@ -840,7 +862,7 @@ url адрес
 </div>
     
     <div id="footer">
-  Generated on Thu May 19 15:50:50 2011 by 
+  Generated on Sat May 21 12:16:29 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.6.8 (ruby-1.8.7).
 </div>
