@@ -13,7 +13,7 @@ class VkTools::Pages
   end
 
   # Делает get запрос по указанному адресу
-  # @param [String] path url адрес
+  # @param [String, Hash] path url адрес или расширенные параметры запроса (см. Mechanize#new)
   # @return [String] код страницы
   # @note url адрес должен быть полным, т.е. начинаться с http://
   def get(path)
@@ -24,10 +24,11 @@ class VkTools::Pages
   # Делает post запрос по указанному адресу
   # @param [Path] path url адрес
   # @param [Hash] params хэш параметров запроса
+  # @param [Hash] headers хэш хедеров
   # @return [String] код страницы
   # @note url адрес должен быть полным, т.е. начинаться с http://
-  def post(path, params)
-    page = @agent.post(path, params)
+  def post(path, params={}, headers={})
+    page = @agent.post(path, params, headers)
     page.body
   end
 
