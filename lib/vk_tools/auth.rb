@@ -22,8 +22,13 @@ module VkTools::Auth
     # @yieldparam [VkTools::Pages] vk_pages обертка для доступа к контенту vkontakte.ru
     def authorize(login, password)
       auth_data = inner_authorize(login, password)
-      vk_api = VkTools::Api.new :access_token => auth_data[:access_token]
-      vk_pages = VkTools::Pages.new :cookie => auth_data[:cookie]
+      if !!auth_data
+        vk_api = VkTools::Api.new :access_token => auth_data[:access_token]
+        vk_pages = VkTools::Pages.new :cookie => auth_data[:cookie]
+      else
+        log_exception("Authentification problem, probably wrong password or login")
+        vk_api, vk_pages = nil, nil
+      end
       if block_given?
         yield vk_api, vk_pages 
       else
