@@ -16,4 +16,8 @@ module VkTools
   autoload :Pages
 
   include Auth
+  # Класс исключение, вызывается при проблемах с подключением к серверу
+  class ConnectionError < Exception; end
+  # Класс исключение, вызывается при получении JSON ответа c ошибкой
+  class ResponseError < Exception; end
 end

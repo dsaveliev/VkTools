@@ -3,16 +3,26 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>VkTools API Documentation</title>
-<link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
-<link rel="stylesheet" href="css/common.css" type="text/css" media="screen" charset="utf-8" />
+<title>
+  File: README
+  
+    &mdash; VkTools API Documentation
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" media="screen" charset="utf-8" />
 
 <script type="text/javascript" charset="utf-8">
   relpath = '';
   if (relpath != '') relpath += '/';
 </script>
-<script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
-<script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
 
   </head>
   <body>
@@ -31,11 +41,14 @@
 </div>
 
       <div id="search">
-  <a id="class_list_link" href="#">Class List</a>
-  <a id="method_list_link" href="#">Method List</a>
-  <a id ="file_list_link" href="#">File List</a>
+  
+    <a id="class_list_link" href="#">Class List</a>
+  
+    <a id="method_list_link" href="#">Method List</a>
+  
+    <a id="file_list_link" href="#">File List</a>
+  
 </div>
-
       <div class="clear"></div>
     </div>
     
@@ -89,6 +102,10 @@
 
 <span class='comment val'># если в функции присутствует точка - заменяем её на подчеркивание</span>
 <span class='messages_count identifier id'>messages_count</span> <span class='assign token'>=</span> <span class='api identifier id'>api</span><span class='dot token'>.</span><span class='messages_get identifier id'>messages_get</span><span class='lbrack token'>[</span><span class='integer val'>0</span><span class='rbrack token'>]</span>
+
+<span class='comment val'># чтобы НЕ игнорировать исключения, вызываем методы с ! в конце</span>
+<span class='comment val'># иначе, в случае ошибки, метод вернет nil</span>
+<span class='messages_count identifier id'>messages_count</span> <span class='assign token'>=</span> <span class='api identifier id'>api</span><span class='dot token'>.</span><span class='messages_get! fid id'>messages_get!</span><span class='lbrack token'>[</span><span class='integer val'>0</span><span class='rbrack token'>]</span>
 </pre>
 
 <h4>Получение страниц vkontakte.ru</h4>
@@ -114,9 +131,9 @@
 </pre></div></div>
     
     <div id="footer">
-  Generated on Sat May 21 12:16:29 2011 by 
+  Generated on Mon May 30 14:20:50 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.6.8 (ruby-1.8.7).
+  0.7.1 (ruby-1.8.7).
 </div>
 
   </body>

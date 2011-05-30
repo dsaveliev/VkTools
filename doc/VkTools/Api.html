@@ -3,16 +3,26 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Class: VkTools::Api</title>
-<link rel="stylesheet" href="../css/style.css" type="text/css" media="screen" charset="utf-8" />
-<link rel="stylesheet" href="../css/common.css" type="text/css" media="screen" charset="utf-8" />
+<title>
+  Class: VkTools::Api
+  
+    &mdash; VkTools API Documentation
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" media="screen" charset="utf-8" />
 
 <script type="text/javascript" charset="utf-8">
   relpath = '..';
   if (relpath != '') relpath += '/';
 </script>
-<script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
-<script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
 
   </head>
   <body>
@@ -33,11 +43,14 @@
 </div>
 
       <div id="search">
-  <a id="class_list_link" href="#">Class List</a>
-  <a id="method_list_link" href="#">Method List</a>
-  <a id ="file_list_link" href="#">File List</a>
+  
+    <a id="class_list_link" href="#">Class List</a>
+  
+    <a id="method_list_link" href="#">Method List</a>
+  
+    <a id="file_list_link" href="#">File List</a>
+  
 </div>
-
       <div class="clear"></div>
     </div>
     
@@ -115,6 +128,11 @@ Dmitry Savelev
 </div>
 
   
+  
+  
+  
+
+
   
   
   
@@ -250,10 +268,10 @@ A new instance of Api
   
     <li>
       
-        <span class='type'>(<tt>Hash</tt>)</span>
-      
-      
         <span class='name'>params</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
       
       
         <em class="default">(defaults to: <tt>{}</tt>)</em>
@@ -283,7 +301,9 @@ A new instance of Api
 13
 14
 15
-16</pre>
+16
+17
+18</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/vk_tools/api.rb', line 8</span>
@@ -296,6 +316,8 @@ A new instance of Api
   <span class='@service_port ivar id'>@service_port</span> <span class='assign token'>=</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:service_port</span><span class='rbrack token'>]</span> <span class='orop op'>||</span> <span class='integer val'>443</span>
   <span class='@use_ssl ivar id'>@use_ssl</span> <span class='assign token'>=</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:use_ssl</span><span class='rbrack token'>]</span> <span class='orop op'>||</span> <span class='true true kw'>true</span>
   <span class='@method_as_param ivar id'>@method_as_param</span> <span class='assign token'>=</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:method_as_param</span><span class='rbrack token'>]</span> <span class='orop op'>||</span> <span class='false false kw'>false</span>
+
+  <span class='@ignore_exception ivar id'>@ignore_exception</span> <span class='assign token'>=</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:ignore_exception</span><span class='rbrack token'>]</span> <span class='orop op'>||</span> <span class='false false kw'>false</span>
 <span class='end end kw'>end</span>
 </pre>
     </td>
@@ -335,8 +357,8 @@ A new instance of Api
   
     <li>
       
-        <span class='type'>(<tt>Hash</tt>)</span>
       
+        <span class='type'>(<tt>Hash</tt>)</span>
       
       
       
@@ -356,8 +378,6 @@ A new instance of Api
       <pre class="lines">
 
 
-27
-28
 29
 30
 31
@@ -368,10 +388,15 @@ A new instance of Api
 36
 37
 38
-39</pre>
+39
+40
+41
+42
+43
+44</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/vk_tools/api.rb', line 27</span>
+      <pre class="code"><span class="info file"># File 'lib/vk_tools/api.rb', line 29</span>
 
 <span class='def def kw'>def</span> <span class='method_missing identifier id'>method_missing</span><span class='lparen token'>(</span><span class='method identifier id'>method</span><span class='comma token'>,</span> <span class='mult op'>*</span><span class='args identifier id'>args</span><span class='rparen token'>)</span>
   <span class='begin begin kw'>begin</span>
@@ -383,7 +408,10 @@ A new instance of Api
     <span class='return return kw'>return</span> <span class='response identifier id'>response</span> <span class='if if_mod kw'>if</span> <span class='response identifier id'>response</span>
   <span class='rescue rescue kw'>rescue</span> <span class='Exception constant id'>Exception</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='exc identifier id'>exc</span>
     <span class='log_exception identifier id'>log_exception</span><span class='lparen token'>(</span><span class='exc identifier id'>exc</span><span class='rparen token'>)</span>
-    <span class='super super kw'>super</span>
+    <span class='puts identifier id'>puts</span> <span class='string val'>&quot;VkTools. &quot;</span> <span class='plus op'>+</span> <span class='exc identifier id'>exc</span><span class='dot token'>.</span><span class='class identifier id'>class</span><span class='dot token'>.</span><span class='to_s identifier id'>to_s</span> <span class='plus op'>+</span> <span class='string val'>&quot; : &quot;</span> <span class='plus op'>+</span> <span class='exc identifier id'>exc</span><span class='dot token'>.</span><span class='message identifier id'>message</span> <span class='plus op'>+</span> <span class='string val'>&quot;\n&quot;</span> <span class='plus op'>+</span> <span class='exc identifier id'>exc</span><span class='dot token'>.</span><span class='backtrace identifier id'>backtrace</span><span class='dot token'>.</span><span class='join identifier id'>join</span><span class='lparen token'>(</span><span class='string val'>&quot;\n&quot;</span><span class='rparen token'>)</span>
+    <span class='raise identifier id'>raise</span> <span class='exc identifier id'>exc</span> <span class='if if_mod kw'>if</span> <span class='method identifier id'>method</span><span class='dot token'>.</span><span class='to_s identifier id'>to_s</span><span class='dot token'>.</span><span class='ends_with? fid id'>ends_with?</span><span class='lparen token'>(</span><span class='string val'>'!'</span><span class='rparen token'>)</span>
+    <span class='nil nil kw'>nil</span>
+<span class='comment val'>#      super</span>
   <span class='end end kw'>end</span>
 <span class='end end kw'>end</span>
 </pre>
@@ -421,8 +449,8 @@ A new instance of Api
   
     <li>
       
-        <span class='type'>(<tt>Hash</tt>)</span>
       
+        <span class='type'>(<tt>Hash</tt>)</span>
       
       
       
@@ -442,12 +470,12 @@ A new instance of Api
       <pre class="lines">
 
 
-20
-21
-22</pre>
+22
+23
+24</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/vk_tools/api.rb', line 20</span>
+      <pre class="code"><span class="info file"># File 'lib/vk_tools/api.rb', line 22</span>
 
 <span class='def def kw'>def</span> <span class='to_hash identifier id'>to_hash</span>
   <span class='lbrace token'>{</span> <span class='symbol val'>:access_token</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='@access_token ivar id'>@access_token</span> <span class='rbrace token'>}</span>
@@ -463,9 +491,9 @@ A new instance of Api
 </div>
     
     <div id="footer">
-  Generated on Sat May 21 12:16:29 2011 by 
+  Generated on Mon May 30 14:20:51 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.6.8 (ruby-1.8.7).
+  0.7.1 (ruby-1.8.7).
 </div>
 
   </body>

@@ -13,6 +13,8 @@ class VkTools::Api
     @service_port = params[:service_port] || 443
     @use_ssl = params[:use_ssl] || true
     @method_as_param = params[:method_as_param] || false
+
+    @ignore_exception = params[:ignore_exception] || false
   end
 
   # Возвращение хэша с токеном
@@ -34,7 +36,10 @@ class VkTools::Api
       return response if response
     rescue Exception => exc
       log_exception(exc)
-      super
+      puts "VkTools. " + exc.class.to_s + " : " + exc.message + "\n" + exc.backtrace.join("\n")
+      raise exc if method.to_s.ends_with?('!')
+      nil
+#      super
     end
   end
 
@@ -58,10 +63,11 @@ class VkTools::Api
     end
 
     def convert_method_to_params(method)
+      method_as_string = method.to_s.gsub('!', '')
       if @method_as_param
-        @params[:method] = method.to_s.gsub("_", ".")
+        @params[:method] = method_as_string.gsub("_", ".")
       else
-        @full_service_path = "#{@service_path}/#{method.to_s.gsub("_", ".")}"
+        @full_service_path = "#{@service_path}/#{method_as_string.gsub("_", ".")}"
       end
     end
 
@@ -82,7 +88,7 @@ class VkTools::Api
           when Hash then
             hash = {}
             item.each do |k,v|
-              hash[k.to_sym] = Array === v ? symbolize_keys(v) : v
+              hash[k.to_sym] = Array === v ? v : symbolize_keys(v)
             end
             hash
           else item
@@ -102,8 +108,9 @@ class VkTools::Api
       resp, data = http.get(path)
 
       unless resp.code_type == Net::HTTPOK
-        log_exception("Bad response from #{@service_address}: #{resp.code}")
-        return
+        message = "Bad response from #{@service_address}: #{resp.code}"
+        log_exception(message)
+        raise VkTools::ConnectionError, message
       end
 
       return data unless data =~ /^[\{|\[].*[\}|\]]$/
@@ -111,8 +118,9 @@ class VkTools::Api
 
       attributes.keys.each do |key|
         if key.to_s =~ /.*error.*/
-          log_exception("#{@service_name} request error: #{attributes[key].inspect}")
-          return
+          message = "#{@service_name} request error: #{attributes[key].inspect}"
+          log_exception(message)
+          raise VkTools::ResponseError, message
         end
       end if Hash === attributes
 

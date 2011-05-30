@@ -2,6 +2,7 @@ require 'bundler/setup'
 require 'vk_tools'
 require 'rspec/core'
 require 'fakeweb'
+require 'lib/vk_tools'
 
 RSpec.configure do |config|
   # == Mock Framework
