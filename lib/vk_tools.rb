@@ -17,6 +17,7 @@ module VkTools
 
   include Auth
   # Класс исключение, вызывается при проблемах с подключением к серверу
+  class Exception < ::Exception; end
   class ConnectionError < Exception; end
   # Класс исключение, вызывается при получении JSON ответа c ошибкой
   class ResponseError < Exception; end
