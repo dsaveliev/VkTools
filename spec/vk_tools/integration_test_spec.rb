@@ -49,7 +49,7 @@ describe "VkTools" do
     end
   end
 
-  describe "Connection error" do
+  describe "Api error" do
     before(:each) do
       FakeWeb.register_uri(
         :any,
@@ -75,7 +75,7 @@ describe "VkTools" do
       )
     end
 
-    it "should log in with success" do
+    it "should process api error" do
       VkTools.client_id = "2046271"
       VkTools.client_secret = "N1wu3hhKJ9HGsjuN7pfS"
       
@@ -94,7 +94,7 @@ describe "VkTools" do
     end
   end
 
-  describe "Success case" do
+  describe "Connection error" do
     before(:each) do
       FakeWeb.register_uri(
         :any,
@@ -120,7 +120,7 @@ describe "VkTools" do
       )
     end
 
-    it "should not log in with success" do
+    it "should process connection error" do
       VkTools.client_id = "2046271"
       VkTools.client_secret = "N1wu3hhKJ9HGsjuN7pfS"
       
