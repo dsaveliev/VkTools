@@ -17,9 +17,9 @@ module VkTools
 
   include Auth
   # Родительский класс - исключение
-  class BaseException < Exception; end
+  class BaseError < Exception; end
   # Класс - исключение, вызывается при проблемах с подключением к серверу
-  class ConnectionError < BaseException; end
+  class ConnectionError < BaseError; end
   # Класс - исключение, вызывается при получении JSON ответа c ошибкой
-  class ResponseError < BaseException; end
+  class ResponseError < BaseError; end
 end
