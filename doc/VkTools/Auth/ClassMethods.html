@@ -483,7 +483,7 @@ Client Secret приложения vkontakte.ru, через которое
     <span class='vk_api identifier id'>vk_api</span> <span class='assign token'>=</span> <span class='VkTools constant id'>VkTools</span><span class='colon2 op'>::</span><span class='Api constant id'>Api</span><span class='dot token'>.</span><span class='new identifier id'>new</span> <span class='symbol val'>:access_token</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='auth_data identifier id'>auth_data</span><span class='lbrack token'>[</span><span class='symbol val'>:access_token</span><span class='rbrack token'>]</span>
     <span class='vk_pages identifier id'>vk_pages</span> <span class='assign token'>=</span> <span class='VkTools constant id'>VkTools</span><span class='colon2 op'>::</span><span class='Pages constant id'>Pages</span><span class='dot token'>.</span><span class='new identifier id'>new</span> <span class='symbol val'>:cookie</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='auth_data identifier id'>auth_data</span><span class='lbrack token'>[</span><span class='symbol val'>:cookie</span><span class='rbrack token'>]</span>
   <span class='else else kw'>else</span>
-    <span class='log_exception identifier id'>log_exception</span><span class='lparen token'>(</span><span class='string val'>&quot;Authentification problem, probably wrong password or login&quot;</span><span class='rparen token'>)</span>
+    <span class='puts identifier id'>puts</span> <span class='string val'>&quot;Authentification problem, probably wrong password or login&quot;</span>
     <span class='vk_api identifier id'>vk_api</span><span class='comma token'>,</span> <span class='vk_pages identifier id'>vk_pages</span> <span class='assign token'>=</span> <span class='nil nil kw'>nil</span><span class='comma token'>,</span> <span class='nil nil kw'>nil</span>
   <span class='end end kw'>end</span>
   <span class='if if kw'>if</span> <span class='block_given? fid id'>block_given?</span>
@@ -503,7 +503,7 @@ Client Secret приложения vkontakte.ru, через которое
 </div>
     
     <div id="footer">
-  Generated on Mon May 30 14:20:51 2011 by 
+  Generated on Tue May 31 07:15:26 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.7.1 (ruby-1.8.7).
 </div>

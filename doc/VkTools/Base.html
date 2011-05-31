@@ -289,15 +289,17 @@ Dmitry Savelev
 12
 13
 14
-15</pre>
+15
+16</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/vk_tools/base.rb', line 11</span>
 
 <span class='def def kw'>def</span> <span class='log_exception identifier id'>log_exception</span><span class='lparen token'>(</span><span class='exc identifier id'>exc</span><span class='rparen token'>)</span>
-  <span class='return return kw'>return</span> <span class='unless unless_mod kw'>unless</span> <span class='notop op'>!</span><span class='notop op'>!</span><span class='VkTools constant id'>VkTools</span><span class='dot token'>.</span><span class='logger identifier id'>logger</span>
-  <span class='exc identifier id'>exc</span> <span class='assign token'>=</span> <span class='Exception constant id'>Exception</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='exc identifier id'>exc</span><span class='rparen token'>)</span> <span class='if if_mod kw'>if</span> <span class='String constant id'>String</span> <span class='eqq op'>===</span> <span class='exc identifier id'>exc</span>
-  <span class='VkTools constant id'>VkTools</span><span class='dot token'>.</span><span class='logger identifier id'>logger</span><span class='dot token'>.</span><span class='error identifier id'>error</span> <span class='string val'>&quot;VkTools. &quot;</span> <span class='plus op'>+</span> <span class='exc identifier id'>exc</span><span class='dot token'>.</span><span class='class identifier id'>class</span><span class='dot token'>.</span><span class='to_s identifier id'>to_s</span> <span class='plus op'>+</span> <span class='string val'>&quot; : &quot;</span> <span class='plus op'>+</span> <span class='exc identifier id'>exc</span><span class='dot token'>.</span><span class='message identifier id'>message</span> <span class='plus op'>+</span> <span class='string val'>&quot;\n&quot;</span> <span class='plus op'>+</span> <span class='exc identifier id'>exc</span><span class='dot token'>.</span><span class='backtrace identifier id'>backtrace</span><span class='dot token'>.</span><span class='join identifier id'>join</span><span class='lparen token'>(</span><span class='string val'>&quot;\n&quot;</span><span class='rparen token'>)</span>
+  <span class='message identifier id'>message</span> <span class='assign token'>=</span> <span class='dstring node'>&quot;Exception: #{exc.class.to_s} : #{exc.message} \n #{exc.backtrace.join(&quot;\n&quot;)} \n&quot;</span>
+  <span class='puts identifier id'>puts</span> <span class='message identifier id'>message</span>
+  <span class='VkTools constant id'>VkTools</span><span class='dot token'>.</span><span class='logger identifier id'>logger</span><span class='dot token'>.</span><span class='error identifier id'>error</span> <span class='message identifier id'>message</span> <span class='if if_mod kw'>if</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='logger identifier id'>logger</span>
+  <span class='raise identifier id'>raise</span> <span class='exc identifier id'>exc</span>
 <span class='end end kw'>end</span>
 </pre>
     </td>
@@ -310,7 +312,7 @@ Dmitry Savelev
 </div>
     
     <div id="footer">
-  Generated on Mon May 30 14:20:51 2011 by 
+  Generated on Tue May 31 07:15:26 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.7.1 (ruby-1.8.7).
 </div>
