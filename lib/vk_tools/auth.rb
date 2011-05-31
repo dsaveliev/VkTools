@@ -26,7 +26,7 @@ module VkTools::Auth
         vk_api = VkTools::Api.new :access_token => auth_data[:access_token]
         vk_pages = VkTools::Pages.new :cookie => auth_data[:cookie]
       else
-        log_exception("Authentification problem, probably wrong password or login")
+        puts "Authentification problem, probably wrong password or login"
         vk_api, vk_pages = nil, nil
       end
       if block_given?
@@ -74,14 +74,12 @@ module VkTools::Auth
         begin
           resp, data = http.post(path, data, headers)
           unless resp.code_type == Net::HTTPOK
-            log_exception("Bad response from api.vk.com: #{resp.code}")
-            return
+            raise VkTools::ConnectionError, "Bad response from api.vk.com: #{resp.code}"
           end
           attributes = JSON.parse(data)
 
           if attributes.has_key?("error")
-            log_exception("Authentification problem: #{attributes['error']}")
-            return
+            raise VkTools::ResponseError, "Authentification problem: #{attributes['error']}"
           end
           {
             :access_token => attributes['access_token'],
@@ -90,7 +88,6 @@ module VkTools::Auth
           }
         rescue Exception => exc
           log_exception(exc)
-          return
         end
       end
   end

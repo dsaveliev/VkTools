@@ -35,9 +35,7 @@ class VkTools::Api
       response = send_request
       return response if response
     rescue Exception => exc
-      log_exception(exc)
-      puts "VkTools. " + exc.class.to_s + " : " + exc.message + "\n" + exc.backtrace.join("\n")
-      raise exc if method.to_s.ends_with?('!')
+      log_exception exc if method.to_s.ends_with?('!')
       nil
 #      super
     end
@@ -109,7 +107,6 @@ class VkTools::Api
 
       unless resp.code_type == Net::HTTPOK
         message = "Bad response from #{@service_address}: #{resp.code}"
-        log_exception(message)
         raise VkTools::ConnectionError, message
       end
 
@@ -119,7 +116,6 @@ class VkTools::Api
       attributes.keys.each do |key|
         if key.to_s =~ /.*error.*/
           message = "#{@service_name} request error: #{attributes[key].inspect}"
-          log_exception(message)
           raise VkTools::ResponseError, message
         end
       end if Hash === attributes

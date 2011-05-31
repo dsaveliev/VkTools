@@ -9,8 +9,9 @@ module VkTools::Base
   # Логирование уровня error
   # @param [Exception, String] exc текст исключения или само исключение
   def log_exception(exc)
-    return unless !!VkTools.logger
-    exc = Exception.new(exc) if String === exc
-    VkTools.logger.error "VkTools. " + exc.class.to_s + " : " + exc.message + "\n" + exc.backtrace.join("\n")
+    message = "Exception: #{exc.class.to_s} : #{exc.message} \n #{exc.backtrace.join("\n")} \n"
+    puts message
+    VkTools.logger.error message if self.logger
+    raise exc
   end
 end
