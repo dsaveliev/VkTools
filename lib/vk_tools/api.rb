@@ -120,16 +120,18 @@ class VkTools::Api
         end
       end if Hash === attributes
 
-      case attributes
-        when Array then
-          return symbolize_keys attributes
-        when Hash then
-          if attributes.has_key?("response")
-            return symbolize_keys attributes["response"]
-          else
-            return symbolize_keys attributes
-          end
-        else return attributes
-      end
+      attributes
+
+#      case attributes
+#        when Array then
+#          return symbolize_keys attributes
+#        when Hash then
+#          if attributes.has_key?("response")
+#            return symbolize_keys attributes["response"]
+#          else
+#            return symbolize_keys attributes
+#          end
+#        else return attributes
+#      end
     end
 end
