@@ -120,7 +120,7 @@ class VkTools::Api
         end
       end if Hash === attributes
 
-      attributes
+      attributes.has_key?("response") ? attributes["response"] : attributes
 
 #      case attributes
 #        when Array then
