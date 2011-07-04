@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "VkTools" do
+describe VkTools do
   before(:each) do
     FakeWeb.register_uri(
       :any,
@@ -14,7 +14,7 @@ describe "VkTools" do
     FakeWeb.register_uri(
       :any,
       'https://api.vk.com/oauth/token', 
-      :body => '{"access_token":"8a53a6fa89c9cf5e89c9cf5eac89d6f661089c989c9f0a0f7de91f4e108efc8","expires_in":0,"user_id":60451236}',
+      :body => '{"access_token":"8a53a6fa89c9cf5e89c9cf5eac89d6f661089c989c9f0a0f7de91f4e108efc8","expires_in":86400,"user_id":60451236}',
       :status => ["200", "Success"]      
     )
 
@@ -30,21 +30,84 @@ describe "VkTools" do
       'http://m.vkontakte.ru',
       :body => 'В Контакте'  
     )
+
+    described_class.client_id = "2046271"
+    described_class.client_secret = "N1wu3hhKJ9HGsjuN7pfS"
+    described_class.redis_options = {:host => 'localhost', :db => 0} #Пишем в "помойку" - :db => 0, чтобы не запороть случайно данные сервисов
+
+
+    described_class.send(:redis).flushdb
   end
 
-  it "integration test" do
-    VkTools.client_id = "2046271"
-    VkTools.client_secret = "N1wu3hhKJ9HGsjuN7pfS"
-    
-    login = "test"
-    password = "test"
-    
-    VkTools.authorize(login, password) do |api, pages|
-      api.getUserInfo[:user_id].should_not == nil
-      pages.get('http://m.vkontakte.ru').include?('В Контакте').should == true
-      api.to_hash[:access_token].to_s.empty?.should == false
-      pages.to_hash[:cookie].to_s.empty?.should == false
+
+  context ".authorize" do
+    specify "авторизует пользователя на вконтакте по логину/паролю" do
+      described_class.authorize('test', 'test', :identity => 79000000000) do |api, pages|
+        api.getUserInfo[:user_id].should_not be_nil
+        pages.get('http://m.vkontakte.ru').should include('В Контакте')
+        api.to_hash[:access_token].should_not be_empty
+        pages.to_hash[:cookie].to_s.should_not be_empty
+      end
     end
+
+    it "в случае успешной авторизации запоминает данные в redis" do
+      described_class.authorize('test', 'test', :identity => 79000000000)
+
+      result = described_class.send(:redis).hgetall("vk_tools_79000000000")
+      result.should be_a(Hash)
+      result['vk_user_id'].should == "60451236"
+      result['access_token'].should == "8a53a6fa89c9cf5e89c9cf5eac89d6f661089c989c9f0a0f7de91f4e108efc8"
+    end
+
+    it ".authorize в качестве expires_in устанавливает минимальное значение из ответа вконтакте, и установленного пользователем значения" do
+      # Т.к. проверяем прямо в редисе спрашивая ttl, может быть так что тест вдруг залочится на пару секунд, и ttl не будет равен expires_in на это кол-во секунд.
+      # Поэтому сделаем порог правильного ответа, равного 3 секунды
+      threshold = 3.seconds.to_i
+
+      described_class.authorize('test', 'test', :identity => 79000000000)
+      described_class.send(:redis).ttl("vk_tools_79000000000").should be_within(threshold).of(86400)
+
+      described_class.authorize('test', 'test', :identity => 79000000000, :expires_in => 100)
+      described_class.send(:redis).ttl("vk_tools_79000000000").should be_within(threshold).of(100)
+
+      described_class.authorize('test', 'test', :identity => 79000000000, :expires_in => 100000)
+      described_class.send(:redis).ttl("vk_tools_79000000000").should be_within(threshold).of(86400)
+    end
+  end
+
+  it ".api позволяет получить api по запомненной авторизации" do
+    described_class.authorize('test', 'test', :identity => 79000000000)
+    result = described_class.api(79000000000)
+    result.should be_a(VkTools::Api)
+    result.to_hash[:access_token].should == "8a53a6fa89c9cf5e89c9cf5eac89d6f661089c989c9f0a0f7de91f4e108efc8"
+
+    described_class.api(79000000001).should be_nil
+  end
+
+  it "позволяет получить pages по запомненной авторизации" do
+    described_class.authorize('test', 'test', :identity => 79000000000)
+    result = described_class.pages(79000000000)
+    result.should be_a(VkTools::Pages)
+    described_class.pages(79000000001).should be_nil
+
+  end
+
+  specify ".identity_exists?" do
+    described_class.authorize('test', 'test', :identity => 79000000000)
+    should be_identity_exists(79000000000)
+    should_not be_identity_exists(79000000001)
+  end
+
+  specify ".forget" do
+    described_class.authorize('test', 'test', :identity => 79000000000)
+    should be_identity_exists(79000000000)
+    described_class.forget(79000000000)
+    should_not be_identity_exists(79000000000)
+  end
+
+  specify ".access_token_for" do
+    described_class.authorize('test', 'test', :identity => 79000000000)
+    described_class.access_token_for(79000000000).should == "8a53a6fa89c9cf5e89c9cf5eac89d6f661089c989c9f0a0f7de91f4e108efc8"
   end
 end
 

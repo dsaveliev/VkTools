@@ -2,17 +2,27 @@
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>VkTools API Documentation</title>
-<link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
-<link rel="stylesheet" href="css/common.css" type="text/css" media="screen" charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf8" />
+<title>
+  File: README
+  
+    &mdash; VkTools API Documentation
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" media="screen" charset="utf-8" />
 
 <script type="text/javascript" charset="utf-8">
   relpath = '';
   if (relpath != '') relpath += '/';
 </script>
-<script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
-<script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
 
   </head>
   <body>
@@ -31,11 +41,14 @@
 </div>
 
       <div id="search">
-  <a id="class_list_link" href="#">Class List</a>
-  <a id="method_list_link" href="#">Method List</a>
-  <a id ="file_list_link" href="#">File List</a>
+  
+    <a id="class_list_link" href="#">Class List</a>
+  
+    <a id="method_list_link" href="#">Method List</a>
+  
+    <a id="file_list_link" href="#">File List</a>
+  
 </div>
-
       <div class="clear"></div>
     </div>
     
@@ -111,12 +124,46 @@
 <p>Логирование можно подключить следующим образом:</p>
 
 <pre class="code"><span class='Vktools constant id'>Vktools</span><span class='dot token'>.</span><span class='logger identifier id'>logger</span> <span class='assign token'>=</span> <span class='Rails constant id'>Rails</span><span class='dot token'>.</span><span class='logger identifier id'>logger</span>
-</pre></div></div>
+</pre>
+
+<h4>Кросс-проектное запоминание авторизаций пользователей</h4>
+
+<p>Запомненные авторизации хранятся в redis. Поэтому необходимо сконфигурировать параметры подключения к нему:</p>
+
+<pre class="code"><span class='VkTools constant id'>VkTools</span><span class='dot token'>.</span><span class='redis_options identifier id'>redis_options</span> <span class='assign token'>=</span> <span class='lbrace token'>{</span><span class='symbol val'>:host</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='string val'>'localhost'</span><span class='comma token'>,</span> <span class='symbol val'>:port</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='string val'>'6379'</span><span class='comma token'>,</span> <span class='symbol val'>:db</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='integer val'>3</span><span class='rparen token'>)</span>
+</pre>
+
+<p>Параметры по-умолчанию, которые будут использованы, если не указаны в redis_options:</p>
+
+<pre class="code"><span class='self self kw'>self</span><span class='dot token'>.</span><span class='redis_options identifier id'>redis_options</span><span class='dot token'>.</span><span class='reverse_merge identifier id'>reverse_merge</span><span class='lparen token'>(</span><span class='symbol val'>:host</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='string val'>'192.168.166.42'</span><span class='comma token'>,</span> <span class='symbol val'>:port</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='integer val'>6379</span><span class='comma token'>,</span> <span class='symbol val'>:db</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='integer val'>3</span><span class='rparen token'>)</span>
+</pre>
+
+<p><em>Внимание!</em> Согласно <a href="http://wiki.fun-box.ru/pages/viewpage.action?pageId=10552362">Распределению DB в Redis по сервисам</a>, VkTools назначен :db => 3</p>
+
+<p>Для того, чтобы запомнить авторизацию пользователя на вконтакте, по-минимумы в методы authorize или inner_authorize
+нужно передать опцию :identity - строку или число однозначно и консистетно между проектами идентифицирующих пользователя.
+В большинствен случаев это будет msisdn пользователя. Делать примерно так:</p>
+
+<p>   api, pages = VkTools.authorize('login', 'password', :identity => 79000000000, :expires_in => 10.days)</p>
+
+<p>или</p>
+
+<p>   auth_data = VkTools.inner_authorize('login', 'password', :identity => 79000000000, :expires_in => 10.days)</p>
+
+<p>Так же доступны методы получения api и pages по identity:</p>
+
+<pre class="code"><span class='api identifier id'>api</span> <span class='assign token'>=</span> <span class='VkTools constant id'>VkTools</span><span class='dot token'>.</span><span class='api identifier id'>api</span><span class='lparen token'>(</span><span class='integer val'>79000000000</span><span class='rparen token'>)</span>                       <span class='comment val'># Возвращает VkTools::Api или nil</span>
+<span class='pages identifier id'>pages</span> <span class='assign token'>=</span> <span class='VkTools constant id'>VkTools</span><span class='dot token'>.</span><span class='pages identifier id'>pages</span><span class='lparen token'>(</span><span class='integer val'>79000000000</span><span class='rparen token'>)</span>                   <span class='comment val'># Возвращает VkTools::Pages или nil</span>
+<span class='VkTools constant id'>VkTools</span><span class='dot token'>.</span><span class='identity_exists? fid id'>identity_exists?</span><span class='lparen token'>(</span><span class='integer val'>79000000000</span><span class='rparen token'>)</span>                <span class='comment val'># Возвращает true/false</span>
+<span class='access_token identifier id'>access_token</span> <span class='assign token'>=</span> <span class='VkTools constant id'>VkTools</span><span class='dot token'>.</span><span class='access_token_for identifier id'>access_token_for</span><span class='lparen token'>(</span><span class='integer val'>79000000000</span><span class='rparen token'>)</span> <span class='comment val'># Возвращает access_token или nil</span>
+<span class='VkTools constant id'>VkTools</span><span class='dot token'>.</span><span class='forget identifier id'>forget</span><span class='lparen token'>(</span><span class='integer val'>79000000000</span><span class='rparen token'>)</span>                          <span class='comment val'># Забыть данные аутентификации для соотв. пользователя</span>
+</pre>
+</div></div>
     
     <div id="footer">
-  Generated on Sat May 21 12:16:29 2011 by 
+  Generated on Mon Jul  4 21:56:10 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.6.8 (ruby-1.8.7).
+  0.7.1 (ruby-1.8.7).
 </div>
 
   </body>

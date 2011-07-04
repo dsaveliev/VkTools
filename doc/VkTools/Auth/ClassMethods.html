@@ -2,17 +2,27 @@
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Module: VkTools::Auth::ClassMethods</title>
-<link rel="stylesheet" href="../../css/style.css" type="text/css" media="screen" charset="utf-8" />
-<link rel="stylesheet" href="../../css/common.css" type="text/css" media="screen" charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf8" />
+<title>
+  Module: VkTools::Auth::ClassMethods
+  
+    &mdash; VkTools API Documentation
+  
+</title>
+
+  <link rel="stylesheet" href="../../css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="../../css/common.css" type="text/css" media="screen" charset="utf-8" />
 
 <script type="text/javascript" charset="utf-8">
   relpath = '../..';
   if (relpath != '') relpath += '/';
 </script>
-<script type="text/javascript" charset="utf-8" src="../../js/jquery.js"></script>
-<script type="text/javascript" charset="utf-8" src="../../js/app.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../../js/app.js"></script>
+
 
   </head>
   <body>
@@ -33,11 +43,14 @@
 </div>
 
       <div id="search">
-  <a id="class_list_link" href="#">Class List</a>
-  <a id="method_list_link" href="#">Method List</a>
-  <a id ="file_list_link" href="#">File List</a>
+  
+    <a id="class_list_link" href="#">Class List</a>
+  
+    <a id="method_list_link" href="#">Method List</a>
+  
+    <a id="file_list_link" href="#">File List</a>
+  
 </div>
-
       <div class="clear"></div>
     </div>
     
@@ -188,8 +201,40 @@ Client Secret приложения vkontakte.ru, через которое
 </li>
 
     
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#redis_options-instance_method" title="#redis_options (instance method)">- (Object) <strong>redis_options</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Опции для подключения к redis.
+</p>
+</div></span>
+  
+</li>
+
+    
   </ul>
 
+
+
+  
+  
+  
 
   
     <h2>
@@ -202,7 +247,7 @@ Client Secret приложения vkontakte.ru, через которое
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#authorize-instance_method" title="#authorize (instance method)">- (Object) <strong>authorize</strong>(login, password) {|vk_api, vk_pages| ... }</a>
+      <a href="#access_token_for-instance_method" title="#access_token_for (instance method)">- (String<sup>?</sup>) <strong>access_token_for</strong>(identity) </a>
     
 
     
@@ -216,7 +261,154 @@ Client Secret приложения vkontakte.ru, через которое
 
   
     <span class="summary_desc"><div class='inline'><p>
-Авторизация в vkontakte.ru.
+Получить запомненный access_token
+авторизации.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#api-instance_method" title="#api (instance method)">- (VkTools::Api<sup>?</sup>) <strong>api</strong>(identity) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Получить api по запомненной авторизации.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#authorize-instance_method" title="#authorize (instance method)">- (Object) <strong>authorize</strong>(login, password, options = {}) {|vk_api, vk_pages| ... }</a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Авторизация в vkontakte.ru + инициализация
+VkTools::Api и VkTools::Pages в случае успеха.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#forget-instance_method" title="#forget (instance method)">- (bool) <strong>forget</strong>(identity) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Забыть запомненную авторизацию.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#identity_exists%3F-instance_method" title="#identity_exists? (instance method)">- (Boolean) <strong>identity_exists?</strong>(identity) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Есть ли запомненная авторизация для
+указанного ident.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#inner_authorize-instance_method" title="#inner_authorize (instance method)">- (Hash) <strong>inner_authorize</strong>(login, password, options = {}) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Авторизация в vkontakte по логину и паролю.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#pages-instance_method" title="#pages (instance method)">- (VkTools::Pages<sup>?</sup>) <strong>pages</strong>(identity) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Получить pages по запомненной авторизации.
 </p>
 </div></span>
   
@@ -371,6 +563,60 @@ Client Secret приложения vkontakte.ru, через которое
 </table>
 </div>
     
+      
+      <span id="redis_options=-instance_method"></span>
+      <span id="redis_options-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="redis_options-instance_method">
+  
+    - (<tt>Object</tt>) <strong>redis_options</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong> 
+    <div class='inline'><p>
+Согласно
+<a href="http://wiki.fun-box.ru/pages/viewpage.action?pageId=10552362" target="_parent" title="\320\240\320\260\321\201\320\277\321\200\320\265\320\264\320\265\320\273\320\265\320\275\320\270\321\216 DB \320\262 Redis \320\277\320\276 \321\201\320\265\321\200\320\262\320\270\321\201\320\260\320\274">Распределению DB в Redis по сервисам</a>, VkTools
+назначен :db =&gt; 3
+</p>
+</div>
+  </div>
+
+<p>
+Опции для подключения к redis.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+22
+23
+24</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/vk_tools/auth.rb', line 22</span>
+
+<span class='def def kw'>def</span> <span class='redis_options identifier id'>redis_options</span>
+  <span class='@redis_options ivar id'>@redis_options</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
   </div>
 
 
@@ -379,31 +625,279 @@ Client Secret приложения vkontakte.ru, через которое
     
     
       <div class="method_details first">
-  <p class="signature first" id="authorize-instance_method">
+  <p class="signature first" id="access_token_for-instance_method">
   
-    - (<tt>Object</tt>) <strong>authorize</strong>(login, password) {|vk_api, vk_pages| ... }
+    - (<tt>String</tt><sup>?</sup>) <strong>access_token_for</strong>(identity) 
   
 
   
 </p><div class="docstring">
   <div class="discussion">
     <p>
-Авторизация в vkontakte.ru
+Получить запомненный access_token авторизации
 </p>
 
 
   </div>
 </div>
 <div class="tags">
-  <h3>Yield Parameters:</h3>
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>identity</span>
+      
+      
+        <span class='type'>(<tt>#to_s</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+Что-то уникально идентифицирующее
+пользователя между всеми проектами,
+например msisdn
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>, <tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+108
+109
+110</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/vk_tools/auth.rb', line 108</span>
+
+<span class='def def kw'>def</span> <span class='access_token_for identifier id'>access_token_for</span><span class='lparen token'>(</span><span class='identity identifier id'>identity</span><span class='rparen token'>)</span>
+  <span class='redis identifier id'>redis</span><span class='dot token'>.</span><span class='hget identifier id'>hget</span><span class='lparen token'>(</span><span class='identity_key identifier id'>identity_key</span><span class='lparen token'>(</span><span class='identity identifier id'>identity</span><span class='rparen token'>)</span><span class='comma token'>,</span> <span class='string val'>'access_token'</span><span class='rparen token'>)</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="api-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../Api.html" title="VkTools::Api (class)">VkTools::Api</a></span></tt><sup>?</sup>) <strong>api</strong>(identity) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Получить api по запомненной авторизации
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>identity</span>
+      
+      
+        <span class='type'>(<tt>#to_s</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+Что-то уникально идентифицирующее
+пользователя между всеми проектами,
+например msisdn
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Api.html" title="VkTools::Api (class)">VkTools::Api</a></span></tt>, <tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+27
+28
+29
+30</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/vk_tools/auth.rb', line 27</span>
+
+<span class='def def kw'>def</span> <span class='api identifier id'>api</span><span class='lparen token'>(</span><span class='identity identifier id'>identity</span><span class='rparen token'>)</span>
+  <span class='token identifier id'>token</span> <span class='assign token'>=</span> <span class='access_token_for identifier id'>access_token_for</span><span class='lparen token'>(</span><span class='identity identifier id'>identity</span><span class='rparen token'>)</span>
+  <span class='token identifier id'>token</span> <span class='andop op'>&amp;&amp;</span> <span class='VkTools constant id'>VkTools</span><span class='colon2 op'>::</span><span class='Api constant id'>Api</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='symbol val'>:access_token</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='token identifier id'>token</span><span class='rparen token'>)</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="authorize-instance_method">
+  
+    - (<tt>Object</tt>) <strong>authorize</strong>(login, password, options = {}) {|vk_api, vk_pages| ... }
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Авторизация в vkontakte.ru + инициализация
+VkTools::Api и VkTools::Pages в случае успеха
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>login</span>
+      
+      
+        <span class='type'>(<tt>#to_s</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+Логин авторизуемого пользователя на
+ВКонтакте
+</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>password</span>
+      
+      
+        <span class='type'>(<tt>#to_s</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+Пароль авторизуемого пользователя на
+ВКонтакте
+</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>options</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+    </li>
+  
+</ul>
+
+  
+    
+    
+    
+    
+    
+    
+    <h3>Options Hash (<tt>options</tt>):</h3>
+    <ul class="option">
+      
+        <li>
+          <span class="name">:identity</span>
+          <span class="type">(<tt>#to_s</tt>)</span>
+          <span class="default">
+            
+          </span>
+          &mdash; <div class='inline'><p>
+Что-то, однозначно идентифицирующее
+пользователя консистентно между разными
+сервисами, например msisdn
+</p>
+</div>
+        </tr>
+      
+        <li>
+          <span class="name">:expires_in</span>
+          <span class="type">(<tt>#to_s</tt>)</span>
+          <span class="default">
+            
+          </span>
+          &mdash; <div class='inline'><p>
+Срок жизни (в секундах) авторизации. Если
+не установлено - авторизация живет вечно
+</p>
+</div>
+        </tr>
+      
+    </ul>
+  
+<h3>Yield Parameters:</h3>
 <ul class="yieldparam">
   
     <li>
       
-        <span class='type'>(<tt><span class='object_link'><a href="../Api.html" title="VkTools::Api (class)">VkTools::Api</a></span></tt>)</span>
-      
-      
         <span class='name'>vk_api</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Api.html" title="VkTools::Api (class)">VkTools::Api</a></span></tt>)</span>
       
       
       
@@ -417,10 +911,10 @@ Client Secret приложения vkontakte.ru, через которое
   
     <li>
       
-        <span class='type'>(<tt><span class='object_link'><a href="../Pages.html" title="VkTools::Pages (class)">VkTools::Pages</a></span></tt>)</span>
-      
-      
         <span class='name'>vk_pages</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Pages.html" title="VkTools::Pages (class)">VkTools::Pages</a></span></tt>)</span>
       
       
       
@@ -440,22 +934,24 @@ Client Secret приложения vkontakte.ru, через которое
       <pre class="lines">
 
 
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32</pre>
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/vk_tools/auth.rb', line 23</span>
+      <pre class="code"><span class="info file"># File 'lib/vk_tools/auth.rb', line 48</span>
 
-<span class='def def kw'>def</span> <span class='authorize identifier id'>authorize</span><span class='lparen token'>(</span><span class='login identifier id'>login</span><span class='comma token'>,</span> <span class='password identifier id'>password</span><span class='rparen token'>)</span>
-  <span class='auth_data identifier id'>auth_data</span> <span class='assign token'>=</span> <span class='inner_authorize identifier id'>inner_authorize</span><span class='lparen token'>(</span><span class='login identifier id'>login</span><span class='comma token'>,</span> <span class='password identifier id'>password</span><span class='rparen token'>)</span>
+<span class='def def kw'>def</span> <span class='authorize identifier id'>authorize</span><span class='lparen token'>(</span><span class='login identifier id'>login</span><span class='comma token'>,</span> <span class='password identifier id'>password</span><span class='comma token'>,</span> <span class='options identifier id'>options</span> <span class='assign token'>=</span> <span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='rparen token'>)</span>
+  <span class='comment val'>#TODO: А давайте уберем остюда yield'ы. Помоему они тут совершенно не уместны, т.к. после yield никакой деструкции не делается,результат открутки блока ни на что не влияет, повышения удобства синтаксиса не несет</span>
+  <span class='auth_data identifier id'>auth_data</span> <span class='assign token'>=</span> <span class='inner_authorize identifier id'>inner_authorize</span><span class='lparen token'>(</span><span class='login identifier id'>login</span><span class='comma token'>,</span> <span class='password identifier id'>password</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='rparen token'>)</span>
   <span class='vk_api identifier id'>vk_api</span> <span class='assign token'>=</span> <span class='VkTools constant id'>VkTools</span><span class='colon2 op'>::</span><span class='Api constant id'>Api</span><span class='dot token'>.</span><span class='new identifier id'>new</span> <span class='symbol val'>:access_token</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='auth_data identifier id'>auth_data</span><span class='lbrack token'>[</span><span class='symbol val'>:access_token</span><span class='rbrack token'>]</span>
   <span class='vk_pages identifier id'>vk_pages</span> <span class='assign token'>=</span> <span class='VkTools constant id'>VkTools</span><span class='colon2 op'>::</span><span class='Pages constant id'>Pages</span><span class='dot token'>.</span><span class='new identifier id'>new</span> <span class='symbol val'>:cookie</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='auth_data identifier id'>auth_data</span><span class='lbrack token'>[</span><span class='symbol val'>:cookie</span><span class='rbrack token'>]</span>
   <span class='if if kw'>if</span> <span class='block_given? fid id'>block_given?</span>
@@ -470,14 +966,461 @@ Client Secret приложения vkontakte.ru, через которое
 </table>
 </div>
     
+      <div class="method_details ">
+  <p class="signature " id="forget-instance_method">
+  
+    - (<tt>bool</tt>) <strong>forget</strong>(identity) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Забыть запомненную авторизацию
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>identity</span>
+      
+      
+        <span class='type'>(<tt>#to_s</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+Что-то уникально идентифицирующее
+пользователя между всеми проектами,
+например msisdn
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>bool</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+Существовала ли запомненная авторизация
+до удаления
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+115
+116
+117
+118</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/vk_tools/auth.rb', line 115</span>
+
+<span class='def def kw'>def</span> <span class='forget identifier id'>forget</span><span class='lparen token'>(</span><span class='identity identifier id'>identity</span><span class='rparen token'>)</span>
+  <span class='res identifier id'>res</span> <span class='assign token'>=</span> <span class='redis identifier id'>redis</span><span class='dot token'>.</span><span class='del identifier id'>del</span><span class='lparen token'>(</span><span class='identity_key identifier id'>identity_key</span><span class='lparen token'>(</span><span class='identity identifier id'>identity</span><span class='rparen token'>)</span><span class='rparen token'>)</span>
+  <span class='res identifier id'>res</span> <span class='gt op'>&gt;</span> <span class='integer val'>0</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="identity_exists?-instance_method">
+  
+    - (<tt>Boolean</tt>) <strong>identity_exists?</strong>(identity) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Есть ли запомненная авторизация для
+указанного ident
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>ident</span>
+      
+      
+        <span class='type'>(<tt>#to_s</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+Что-то, что уникально и переносимо
+идентифицирует пользователя среди
+множества проектов (например msisdn)
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+100
+101
+102
+103</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/vk_tools/auth.rb', line 100</span>
+
+<span class='def def kw'>def</span> <span class='identity_exists? fid id'>identity_exists?</span><span class='lparen token'>(</span><span class='identity identifier id'>identity</span><span class='rparen token'>)</span>
+  <span class='k identifier id'>k</span> <span class='assign token'>=</span> <span class='identity_key identifier id'>identity_key</span><span class='lparen token'>(</span><span class='identity identifier id'>identity</span><span class='rparen token'>)</span>
+  <span class='redis identifier id'>redis</span><span class='dot token'>.</span><span class='exists identifier id'>exists</span><span class='lparen token'>(</span><span class='k identifier id'>k</span><span class='rparen token'>)</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="inner_authorize-instance_method">
+  
+    - (<tt>Hash</tt>) <strong>inner_authorize</strong>(login, password, options = {}) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Авторизация в vkontakte по логину и паролю
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>login</span>
+      
+      
+        <span class='type'>(<tt>#to_s</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+Логин авторизуемого пользователя на
+ВКонтакте
+</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>password</span>
+      
+      
+        <span class='type'>(<tt>#to_s</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+Пароль авторизуемого пользователя на
+ВКонтакте
+</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>options</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+    </li>
+  
+</ul>
+
+  
+    
+    
+    
+    
+    
+    
+    <h3>Options Hash (<tt>options</tt>):</h3>
+    <ul class="option">
+      
+        <li>
+          <span class="name">:identity</span>
+          <span class="type">(<tt>#to_s</tt>)</span>
+          <span class="default">
+            
+          </span>
+          &mdash; <div class='inline'><p>
+Что-то, однозначно идентифицирующее
+пользователя консистентно между разными
+сервисами, например msisdn
+</p>
+</div>
+        </tr>
+      
+        <li>
+          <span class="name">:expires_in</span>
+          <span class="type">(<tt>#to_s</tt>)</span>
+          <span class="default">
+            
+          </span>
+          &mdash; <div class='inline'><p>
+Срок жизни (в секундах) авторизации. Если
+не установлено - авторизация живет вечно,
+но не больше чем срок жизни токена на
+ВКонтакте
+</p>
+</div>
+        </tr>
+      
+    </ul>
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+Данные авторизации, в т.ч. :access_token, :cookie,
+:vk_user_id
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/vk_tools/auth.rb', line 68</span>
+
+<span class='def def kw'>def</span> <span class='inner_authorize identifier id'>inner_authorize</span><span class='lparen token'>(</span><span class='login identifier id'>login</span><span class='comma token'>,</span> <span class='password identifier id'>password</span><span class='comma token'>,</span> <span class='options identifier id'>options</span> <span class='assign token'>=</span> <span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='rparen token'>)</span>
+  <span class='redirect_uri identifier id'>redirect_uri</span> <span class='assign token'>=</span> <span class='CGI constant id'>CGI</span><span class='dot token'>.</span><span class='escape identifier id'>escape</span><span class='lparen token'>(</span><span class='string val'>&quot;http://api.vkontakte.ru/blank.html&quot;</span><span class='rparen token'>)</span>
+
+  <span class='path identifier id'>path</span> <span class='assign token'>=</span> <span class='dstring node'>&quot;http://api.vkontakte.ru/oauth/authorize?client_id=#{VkTools.client_id}&amp;redirect_uri=#{redirect_uri}&amp;display=wap&amp;scope=16383&amp;response_type=code&quot;</span>
+  <span class='agent identifier id'>agent</span> <span class='assign token'>=</span> <span class='Mechanize constant id'>Mechanize</span><span class='dot token'>.</span><span class='new identifier id'>new</span>
+  <span class='page identifier id'>page</span> <span class='assign token'>=</span> <span class='agent identifier id'>agent</span><span class='dot token'>.</span><span class='get identifier id'>get</span><span class='lparen token'>(</span><span class='path identifier id'>path</span><span class='rparen token'>)</span>
+  <span class='form identifier id'>form</span> <span class='assign token'>=</span> <span class='page identifier id'>page</span><span class='dot token'>.</span><span class='forms identifier id'>forms</span><span class='dot token'>.</span><span class='first identifier id'>first</span>
+  <span class='if if kw'>if</span> <span class='notop op'>!</span><span class='notop op'>!</span><span class='form identifier id'>form</span>
+    <span class='form identifier id'>form</span><span class='dot token'>.</span><span class='email identifier id'>email</span> <span class='assign token'>=</span> <span class='login identifier id'>login</span>
+    <span class='form identifier id'>form</span><span class='dot token'>.</span><span class='pass identifier id'>pass</span> <span class='assign token'>=</span> <span class='password identifier id'>password</span>
+    <span class='page identifier id'>page</span> <span class='assign token'>=</span> <span class='agent identifier id'>agent</span><span class='dot token'>.</span><span class='submit identifier id'>submit</span><span class='lparen token'>(</span><span class='form identifier id'>form</span><span class='comma token'>,</span> <span class='form identifier id'>form</span><span class='dot token'>.</span><span class='buttons identifier id'>buttons</span><span class='dot token'>.</span><span class='first identifier id'>first</span><span class='rparen token'>)</span>
+  <span class='end end kw'>end</span>
+  <span class='unless unless kw'>unless</span> <span class='page identifier id'>page</span><span class='dot token'>.</span><span class='uri identifier id'>uri</span><span class='dot token'>.</span><span class='to_s identifier id'>to_s</span><span class='dot token'>.</span><span class='include? fid id'>include?</span><span class='lparen token'>(</span><span class='string val'>'code='</span><span class='rparen token'>)</span>
+    <span class='form identifier id'>form</span> <span class='assign token'>=</span> <span class='page identifier id'>page</span><span class='dot token'>.</span><span class='forms identifier id'>forms</span><span class='dot token'>.</span><span class='first identifier id'>first</span>
+    <span class='page identifier id'>page</span> <span class='assign token'>=</span> <span class='agent identifier id'>agent</span><span class='dot token'>.</span><span class='submit identifier id'>submit</span><span class='lparen token'>(</span><span class='form identifier id'>form</span><span class='comma token'>,</span> <span class='form identifier id'>form</span><span class='dot token'>.</span><span class='buttons identifier id'>buttons</span><span class='dot token'>.</span><span class='first identifier id'>first</span><span class='rparen token'>)</span>
+  <span class='end end kw'>end</span>
+  <span class='cookie_jar identifier id'>cookie_jar</span> <span class='assign token'>=</span> <span class='agent identifier id'>agent</span><span class='dot token'>.</span><span class='cookie_jar identifier id'>cookie_jar</span>
+  <span class='cookie identifier id'>cookie</span> <span class='assign token'>=</span> <span class='lbrace token'>{</span> <span class='symbol val'>:cookie</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='cookie_jar identifier id'>cookie_jar</span><span class='dot token'>.</span><span class='dump_cookies identifier id'>dump_cookies</span> <span class='rbrace token'>}</span>
+  <span class='code identifier id'>code</span> <span class='assign token'>=</span> <span class='page identifier id'>page</span><span class='dot token'>.</span><span class='uri identifier id'>uri</span><span class='dot token'>.</span><span class='to_s identifier id'>to_s</span><span class='lbrack token'>[</span><span class='regexp val'>/code=(.*)/</span><span class='comma token'>,</span> <span class='integer val'>1</span><span class='rbrack token'>]</span>
+  <span class='auth_data identifier id'>auth_data</span> <span class='assign token'>=</span> <span class='get_access_token identifier id'>get_access_token</span><span class='lparen token'>(</span><span class='code identifier id'>code</span><span class='rparen token'>)</span>
+  <span class='return return kw'>return</span> <span class='unless unless_mod kw'>unless</span> <span class='auth_data identifier id'>auth_data</span>
+
+  <span class='auth_data identifier id'>auth_data</span><span class='dot token'>.</span><span class='merge! fid id'>merge!</span><span class='lparen token'>(</span><span class='cookie identifier id'>cookie</span><span class='rparen token'>)</span>
+
+  <span class='remember_identity identifier id'>remember_identity</span><span class='lparen token'>(</span><span class='auth_data identifier id'>auth_data</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='rparen token'>)</span> <span class='if if_mod kw'>if</span> <span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='symbol val'>:identity</span><span class='rbrack token'>]</span><span class='dot token'>.</span><span class='present? fid id'>present?</span>
+
+  <span class='auth_data identifier id'>auth_data</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="pages-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../Pages.html" title="VkTools::Pages (class)">VkTools::Pages</a></span></tt><sup>?</sup>) <strong>pages</strong>(identity) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Получить pages по запомненной авторизации
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>identity</span>
+      
+      
+        <span class='type'>(<tt>#to_s</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+Что-то уникально идентифицирующее
+пользователя между всеми проектами,
+например msisdn
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Pages.html" title="VkTools::Pages (class)">VkTools::Pages</a></span></tt>, <tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+35
+36
+37
+38</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/vk_tools/auth.rb', line 35</span>
+
+<span class='def def kw'>def</span> <span class='pages identifier id'>pages</span><span class='lparen token'>(</span><span class='identity identifier id'>identity</span><span class='rparen token'>)</span>
+  <span class='cookie identifier id'>cookie</span> <span class='assign token'>=</span> <span class='redis identifier id'>redis</span><span class='dot token'>.</span><span class='hget identifier id'>hget</span><span class='lparen token'>(</span><span class='identity_key identifier id'>identity_key</span><span class='lparen token'>(</span><span class='identity identifier id'>identity</span><span class='rparen token'>)</span><span class='comma token'>,</span> <span class='string val'>'cookie'</span><span class='rparen token'>)</span>
+  <span class='cookie identifier id'>cookie</span> <span class='andop op'>&amp;&amp;</span> <span class='VkTools constant id'>VkTools</span><span class='colon2 op'>::</span><span class='Pages constant id'>Pages</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='symbol val'>:cookie</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='cookie identifier id'>cookie</span><span class='rparen token'>)</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
   </div>
 
 </div>
     
     <div id="footer">
-  Generated on Sat May 21 12:16:29 2011 by 
+  Generated on Mon Jul  4 21:56:11 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.6.8 (ruby-1.8.7).
+  0.7.1 (ruby-1.8.7).
 </div>
 
   </body>

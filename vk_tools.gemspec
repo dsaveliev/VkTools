@@ -23,6 +23,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency("awesome_print")
   s.add_runtime_dependency("mechanize")
   s.add_runtime_dependency("json")
+  s.add_runtime_dependency("redis", "~> 2.2.1")
 
   s.add_development_dependency("rspec", ["~> 2.5"])
   s.add_development_dependency("rspec-rails", ["~> 2.5"])
