@@ -103,7 +103,9 @@ class VkTools::Api
       http.use_ssl = @use_ssl
       path = "#{@full_service_path}?#{query_string}"
 
-      resp, data = http.get(path)
+
+      resp, data = silence_warnings{ http.get(path) }
+
 
       unless resp.code_type == Net::HTTPOK
         message = "Bad response from #{@service_address}: #{resp.code}"
