@@ -134,7 +134,7 @@ describe VkTools do
       FakeWeb.register_uri(
           :any,
           'https://api.vkontakte.ru/method/getUserInfo?access_token=8a53a6fa89c9cf5e89c9cf5eac89d6f661089c989c9f0a0f7de91f4e108efc8',
-          :body => '{"error":{"user_id":"60451236","user_name":null}}',
+          :body => '{"error":{"user_id":"60451236","user_name":null, "error_code" : 1 }}',
           :status => ["200", "Success"]
       )
     end
@@ -150,7 +150,7 @@ describe VkTools do
         VkTools.authorize(login, password) do |api, pages|
           api.getUserInfo!
         end
-      }.should raise_error(VkTools::ResponseError)
+      }.should raise_error(VkTools::UnknownError)
     end
   end
 

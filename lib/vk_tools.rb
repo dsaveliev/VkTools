@@ -17,9 +17,22 @@ module VkTools
 
   include Auth
   # Родительский класс - исключение
-  class BaseError < Exception; end
+  class Error < ::Exception; end
   # Класс - исключение, вызывается при проблемах с подключением к серверу
-  class ConnectionError < BaseError; end
+  class ConnectionError < Error; end
   # Класс - исключение, вызывается при получении JSON ответа c ошибкой
-  class ResponseError < BaseError; end
+  class ResponseError < Error
+    attr_accessor :vk_error_code
+    attr_accessor :request_params
+    attr_accessor :payload
+  end
+
+  class CaptchaNeeded < ResponseError; end
+  class UnknownError < ResponseError; end
+  class ApplicationDisabled < ResponseError; end
+  class IncorrectSignature < ResponseError; end
+  class UserAuthFailed < ResponseError; end
+  class TooManyRequestsPerSecond < ResponseError; end
+  class PermissionDenied < ResponseError; end
+  class ParameterMissingOrInvalid < ResponseError; end
 end

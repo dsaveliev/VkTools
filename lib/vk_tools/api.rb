@@ -41,7 +41,7 @@ class VkTools::Api
     end
   end
 
-  private
+  protected
 
     def initialise_params
       @args = []
@@ -114,24 +114,43 @@ class VkTools::Api
       attributes = JSON.parse(data)
 
       attributes.keys.each do |key|
-        if key.to_s =~ /.*error.*/
-          message = "#{@service_name} request error: #{attributes[key].inspect}"
-          raise VkTools::ResponseError, message
-        end
-      end if Hash === attributes
+        raise_exception(attributes[key].clone) if key.to_s =~ /.*error.*/
+      end if attributes.is_a?(Hash)
 
-      attributes.has_key?("response") ? attributes["response"] : attributes
+      attributes.include?("response") ? attributes["response"] : attributes
+    end
 
-#      case attributes
-#        when Array then
-#          return symbolize_keys attributes
-#        when Hash then
-#          if attributes.has_key?("response")
-#            return symbolize_keys attributes["response"]
-#          else
-#            return symbolize_keys attributes
-#          end
-#        else return attributes
-#      end
+    def raise_exception(attrs)
+      vk_error_code = attrs.delete('error_code')
+
+      klass = case vk_error_code
+        when 1
+          VkTools::UnknownError
+        when 2
+          VkTools::ApplicationDisabled
+        when 4
+          VkTools::IncorrectSignature
+        when 5
+          VkTools::UserAuthFailed
+        when 6
+          VkTools::TooManyRequestsPerSecond
+        when 7
+          VkTools::PermissionDenied
+        when 100
+          VkTools::ParameterMissingOrInvalid
+        when 14
+          VkTools::CaptchaNeeded
+        else
+          VkTools::ResponseError
+      end
+
+      message = attrs.delete('error_msg')
+      exc = klass.new(message)
+
+      exc.vk_error_code  = vk_error_code
+      exc.request_params = attrs.delete('request_params')
+      exc.payload        = attrs
+
+      raise exc
     end
 end
