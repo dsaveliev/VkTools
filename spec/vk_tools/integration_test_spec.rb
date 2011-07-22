@@ -147,9 +147,8 @@ describe VkTools do
       password = "test"
 
       lambda {
-        VkTools.authorize(login, password) do |api, pages|
-          api.getUserInfo!
-        end
+        api, pages = VkTools.authorize(login, password)
+        api.getUserInfo!
       }.should raise_error(VkTools::UnknownError)
     end
   end
@@ -188,9 +187,8 @@ describe VkTools do
       password = "test"
 
       lambda {
-        VkTools.authorize(login, password) do |api, pages|
-          api.getUserInfo!
-        end
+        api, pages = VkTools.authorize(login, password)
+        api.getUserInfo!
       }.should raise_error(VkTools::ConnectionError)
     end
   end

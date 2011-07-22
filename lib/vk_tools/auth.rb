@@ -46,17 +46,11 @@ module VkTools::Auth
     # @yieldparam [VkTools::Api] vk_api обертка для доступа к RestApi
     # @yieldparam [VkTools::Pages] vk_pages обертка для доступа к контенту vkontakte.ru
     def authorize(login, password, options = {})
-      #TODO: А давайте уберем остюда yield'ы. Помоему они тут совершенно не уместны, т.к. после yield никакой деструкции не делается,результат открутки блока ни на что не влияет, повышения удобства синтаксиса не несет
       auth_data = inner_authorize(login, password, options)
       vk_api = VkTools::Api.new :access_token => auth_data[:access_token]
       vk_pages = VkTools::Pages.new :cookie => auth_data[:cookie]
-      if block_given?
-        yield vk_api, vk_pages 
-      else
-        [vk_api, vk_pages]
-      end
+      [vk_api, vk_pages]
     end
-
 
     # Авторизация в vkontakte по логину и паролю
     # @param [#to_s] login Логин авторизуемого пользователя на ВКонтакте
