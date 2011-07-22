@@ -74,3 +74,40 @@
 Логирование можно подключить следующим образом:
 
     Vktools.logger = Rails.logger
+
+#### Кросс-проектное запоминание авторизаций пользователей
+
+Запомненные авторизации хранятся в redis. Поэтому необходимо сконфигурировать параметры подключения к нему:
+
+    VkTools.redis_options = {:host => 'localhost', :port => '6379', :db => 3)
+
+Параметры по-умолчанию, которые будут использованы, если не указаны в redis_options:
+
+    self.redis_options.reverse_merge(:host => '192.168.166.42', :port => 6379, :db => 3)
+
+_Внимание!_ Согласно [Распределению DB в Redis по сервисам](http://wiki.fun-box.ru/pages/viewpage.action?pageId=10552362), VkTools назначен :db => 3
+
+Для того, чтобы запомнить авторизацию пользователя на вконтакте, по-минимумы в методы authorize или inner_authorize
+нужно передать опцию :identity - строку или число однозначно и консистетно между проектами идентифицирующих пользователя.
+В большинствен случаев это будет msisdn пользователя. Делать примерно так:
+
+
+   api, pages = VkTools.authorize('login', 'password', :identity => 79000000000, :expires_in => 10.days)
+
+или
+
+   auth_data = VkTools.inner_authorize('login', 'password', :identity => 79000000000, :expires_in => 10.days)
+
+
+Так же доступны методы получения api и pages по identity:
+
+    api = VkTools.api(79000000000)                       # Возвращает VkTools::Api или nil
+    pages = VkTools.pages(79000000000)                   # Возвращает VkTools::Pages или nil
+    VkTools.identity_exists?(79000000000)                # Возвращает true/false
+    access_token = VkTools.access_token_for(79000000000) # Возвращает access_token или nil
+    VkTools.forget(79000000000)                          # Забыть данные аутентификации для соотв. пользователя
+
+
+
+
+
