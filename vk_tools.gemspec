@@ -24,7 +24,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency("mechanize")
   s.add_runtime_dependency("json")
   s.add_runtime_dependency("redis", "~> 2.2.1")
-  s.add_runtime_dependency("SystemTimer")
+  #s.add_runtime_dependency("SystemTimer")
 
   s.add_development_dependency("rspec-rails")
   s.add_development_dependency("yard")
