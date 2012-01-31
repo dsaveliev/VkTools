@@ -1,0 +1,38 @@
+--- 
+recorded_with: VCR 2.0.0.rc1
+http_interactions: 
+- request: 
+    method: get
+    uri: https://api.vkontakte.ru/method/getUserInfo?access_token=fdecbb0bfe76d2affe76d2afb8fe69eb90ffe76fe76ed50f838aad6eacb69b2
+    body: ""
+    headers: 
+      Accept: 
+      - "*/*"
+  response: 
+    status: 
+      code: 200
+      message: OK
+    headers: 
+      Vary: 
+      - Host
+      X-Powered-By: 
+      - PHP/5.3.3-7+squeeze3
+      Content-Type: 
+      - text/javascript; charset=utf-8
+      Date: 
+      - Tue, 31 Jan 2012 12:59:07 GMT
+      Content-Length: 
+      - "52"
+      Pragma: 
+      - no-cache
+      Server: 
+      - nginx/1.0.11
+      Set-Cookie: 
+      - remixchk=5; expires=Wed, 23-Jan-2013 15:25:32 GMT; path=/; domain=.vkontakte.ru
+      Cache-Control: 
+      - no-store
+      Connection: 
+      - keep-alive
+    body: "{\"response\":{\"user_id\":\"60451236\",\"user_name\":null}}"
+    http_version: 
+  recorded_at: Tue, 31 Jan 2012 12:59:07 GMT

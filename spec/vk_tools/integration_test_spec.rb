@@ -2,61 +2,42 @@ require 'spec_helper'
 
 describe VkTools do
   before(:each) do
-    FakeWeb.register_uri(
-        :any,
-        'http://api.vkontakte.ru/oauth/authorize?client_id=2046271&redirect_uri=http%3A%2F%2Fapi.vkontakte.ru%2Fblank.html&display=wap&scope=16383&response_type=code',
-        :body => '',
-        :status => ["301", "Moved Permanently"],
-        :location => 'http://api.vkontakte.ru/blank.html#code=9bf0ba25678eebea9c',
-        :set_cookie => ["name=value"]
-    )
-
-    FakeWeb.register_uri(
-        :any,
-        'https://api.vk.com/oauth/token',
-        :body => '{"access_token":"8a53a6fa89c9cf5e89c9cf5eac89d6f661089c989c9f0a0f7de91f4e108efc8","expires_in":86400,"user_id":60451236}',
-        :status => ["200", "Success"]
-    )
-
-    FakeWeb.register_uri(
-        :any,
-        'https://api.vkontakte.ru/method/getUserInfo?access_token=8a53a6fa89c9cf5e89c9cf5eac89d6f661089c989c9f0a0f7de91f4e108efc8',
-        :body => '{"response":{"user_id":"60451236","user_name":null}}',
-        :status => ["200", "Success"]
-    )
-
-    FakeWeb.register_uri(
-        :get,
-        'http://m.vkontakte.ru',
-        :body => 'В Контакте'
-    )
-
     described_class.client_id = "2046271"
     described_class.client_secret = "N1wu3hhKJ9HGsjuN7pfS"
     described_class.redis_options = {:host => 'localhost', :db => 0} #Пишем в "помойку" - :db => 0, чтобы не запороть случайно данные сервисов
-
-
     described_class.send(:redis).flushdb
+
+    @token = "fdecbb0bfe76d2affe76d2afb8fe69eb90ffe76fe76ed50f838aad6eacb69b2"
+    @cookie = "login.vk.com\tFALSE\t/\tFALSE\t1359221530\tl\t60451236\nlogin.vk.com\tFALSE\t/\tFALSE\t1360038869\tp\t85951f06bf294db366a916ef35f996678c24\nlogin.vk.com\tFALSE\t/\tFALSE\t1359453517\ts\t1\nvk.com\tFALSE\t/\tFALSE\t1359242704\tremixlang\t0\nvk.com\tFALSE\t/\tFALSE\t1359505589\tremixsid\t142e466aee83ed0997d76ec0ebc8407bffe5cf3f740fbbc6d19853b4cb4a\nvk.com\tFALSE\t/\tFALSE\t1359157249\tremixchk\t5\n"  
+    @vk_user_id = "60451236"
+    @auth_data = {
+      :access_token => @token,
+      :expires_in => 86400.seconds.to_i,
+      :vk_user_id => @vk_user_id
+    }
+    @api = VkTools::Api.new :access_token => @token
+    @pages = VkTools::Pages.new :cookie => @cookie
   end
 
 
   context ".authorize" do
     specify "авторизует пользователя на вконтакте по логину/паролю" do
-      described_class.authorize('test', 'test', :identity => 79000000000) do |api, pages|
-        api.getUserInfo['user_id'].should_not be_nil
-        pages.get('http://m.vkontakte.ru').should include('В Контакте')
-        api.to_hash[:access_token].should_not be_empty
-        pages.to_hash[:cookie].to_s.should_not be_empty
+      VCR.use_cassette('test_api', 
+                     :record => :new_episodes,
+                     :allow_playback_repeats => true) do
+        @api.getUserInfo['user_id'].should_not be_nil
       end
+      @api.to_hash[:access_token].should_not be_empty
+      @pages.to_hash[:cookie].to_s.should_not be_empty
     end
 
     it "в случае успешной авторизации запоминает данные в redis" do
-      described_class.authorize('test', 'test', :identity => 79000000000)
+      described_class.send("remember_identity", @auth_data, :identity => 79000000000)
 
       result = described_class.send(:redis).hgetall("vk_tools_79000000000")
       result.should be_a(Hash)
-      result['vk_user_id'].should == "60451236"
-      result['access_token'].should == "8a53a6fa89c9cf5e89c9cf5eac89d6f661089c989c9f0a0f7de91f4e108efc8"
+      result['vk_user_id'].should == @vk_user_id
+      result['access_token'].should == @token
     end
 
     it ".authorize в качестве expires_in устанавливает минимальное значение из ответа вконтакте, и установленного пользователем значения" do
@@ -64,13 +45,13 @@ describe VkTools do
       # Поэтому сделаем порог правильного ответа, равного 3 секунды
       threshold = 3.seconds.to_i
 
-      described_class.authorize('test', 'test', :identity => 79000000000)
+      described_class.send("remember_identity", @auth_data, :identity => 79000000000)
       described_class.send(:redis).ttl("vk_tools_79000000000").should be_within(threshold).of(86400)
 
-      described_class.authorize('test', 'test', :identity => 79000000000, :expires_in => 100)
+      described_class.send("remember_identity", @auth_data, :identity => 79000000000, :expires_in => 100)
       described_class.send(:redis).ttl("vk_tools_79000000000").should be_within(threshold).of(100)
 
-      described_class.authorize('test', 'test', :identity => 79000000000, :expires_in => 100000)
+      described_class.send("remember_identity", @auth_data, :identity => 79000000000, :expires_in => 100000)
       described_class.send(:redis).ttl("vk_tools_79000000000").should be_within(threshold).of(86400)
     end
   end
@@ -78,118 +59,55 @@ describe VkTools do
 
   context "success" do
     it ".api позволяет получить api по запомненной авторизации" do
-      described_class.authorize('test', 'test', :identity => 79000000000)
+      described_class.send("remember_identity", @auth_data, :identity => 79000000000)
       result = described_class.api(79000000000)
+      result = @api
       result.should be_a(VkTools::Api)
-      result.to_hash[:access_token].should == "8a53a6fa89c9cf5e89c9cf5eac89d6f661089c989c9f0a0f7de91f4e108efc8"
+      result.to_hash[:access_token].should == @token
 
       described_class.api(79000000001).should be_nil
     end
 
     it "позволяет получить pages по запомненной авторизации" do
-      described_class.authorize('test', 'test', :identity => 79000000000)
+      described_class.send("remember_identity", @auth_data, :identity => 79000000000)
       result = described_class.pages(79000000000)
       result.should be_a(VkTools::Pages)
       described_class.pages(79000000001).should be_nil
-
     end
 
     specify ".identity_exists?" do
-      described_class.authorize('test', 'test', :identity => 79000000000)
+      described_class.send("remember_identity", @auth_data, :identity => 79000000000)
       should be_identity_exists(79000000000)
       should_not be_identity_exists(79000000001)
     end
 
     specify ".forget" do
-      described_class.authorize('test', 'test', :identity => 79000000000)
+      described_class.send("remember_identity", @auth_data, :identity => 79000000000)
       should be_identity_exists(79000000000)
       described_class.forget(79000000000)
       should_not be_identity_exists(79000000000)
     end
 
     specify ".access_token_for" do
-      described_class.authorize('test', 'test', :identity => 79000000000)
-      described_class.access_token_for(79000000000).should == "8a53a6fa89c9cf5e89c9cf5eac89d6f661089c989c9f0a0f7de91f4e108efc8"
-    end
-  end
-
-  describe "Api error" do
-    before(:each) do
-      FakeWeb.register_uri(
-          :any,
-          'http://api.vkontakte.ru/oauth/authorize?client_id=2046271&redirect_uri=http%3A%2F%2Fapi.vkontakte.ru%2Fblank.html&display=wap&scope=16383&response_type=code',
-          :body => '',
-          :status => ["301", "Moved Permanently"],
-          :location => 'http://api.vkontakte.ru/blank.html#code=9bf0ba25678eebea9c',
-          :set_cookie => ["name=value"]
-      )
-
-      FakeWeb.register_uri(
-          :any,
-          'https://api.vk.com/oauth/token',
-          :body => '{"access_token":"8a53a6fa89c9cf5e89c9cf5eac89d6f661089c989c9f0a0f7de91f4e108efc8","expires_in":0,"user_id":60451236}',
-          :status => ["200", "Success"]
-      )
-
-      FakeWeb.register_uri(
-          :any,
-          'https://api.vkontakte.ru/method/getUserInfo?access_token=8a53a6fa89c9cf5e89c9cf5eac89d6f661089c989c9f0a0f7de91f4e108efc8',
-          :body => '{"error":{"user_id":"60451236","user_name":null, "error_code" : 1 }}',
-          :status => ["200", "Success"]
-      )
-    end
-
-    it "should process api error" do
-      VkTools.client_id = "2046271"
-      VkTools.client_secret = "N1wu3hhKJ9HGsjuN7pfS"
-
-      login = "test"
-      password = "test"
-
-      lambda {
-        api, pages = VkTools.authorize(login, password)
-        api.getUserInfo!
-      }.should raise_error(VkTools::UnknownError)
+      described_class.send("remember_identity", @auth_data, :identity => 79000000000)
+      described_class.access_token_for(79000000000).should == @token
     end
   end
 
   describe "Connection error" do
     before(:each) do
-      FakeWeb.register_uri(
-          :any,
-          'http://api.vkontakte.ru/oauth/authorize?client_id=2046271&redirect_uri=http%3A%2F%2Fapi.vkontakte.ru%2Fblank.html&display=wap&scope=16383&response_type=code',
-          :body => '',
-          :status => ["301", "Moved Permanently"],
-          :location => 'http://api.vkontakte.ru/blank.html#code=9bf0ba25678eebea9c',
-          :set_cookie => ["name=value"]
-      )
-
-      FakeWeb.register_uri(
-          :any,
-          'https://api.vk.com/oauth/token',
-          :body => '{"access_token":"8a53a6fa89c9cf5e89c9cf5eac89d6f661089c989c9f0a0f7de91f4e108efc8","expires_in":0,"user_id":60451236}',
-          :status => ["200", "Success"]
-      )
-
-      FakeWeb.register_uri(
-          :any,
-          'https://api.vkontakte.ru/method/getUserInfo?access_token=8a53a6fa89c9cf5e89c9cf5eac89d6f661089c989c9f0a0f7de91f4e108efc8',
-          :body => '',
-          :status => ["500", "Internal Server Error"]
-      )
+      @token = ""
+      @api = VkTools::Api.new :access_token => @token
+      @pages = VkTools::Pages.new :cookie => ""
+      @vcr_cassette = "test_connection_error"
     end
 
-    it "should process connection error" do
-      VkTools.client_id = "2046271"
-      VkTools.client_secret = "N1wu3hhKJ9HGsjuN7pfS"
-
-      login = "test"
-      password = "test"
-
+    it "should process auth error" do
       lambda {
-        api, pages = VkTools.authorize(login, password)
-        api.getUserInfo!
-      }.should raise_error(VkTools::ConnectionError)
+        VCR.use_cassette(@vcr_cassette, :record => :new_episodes) do
+          @api.getUserInfo!
+        end
+      }.should raise_error(VkTools::UserAuthFailed)
     end
   end
 end

@@ -21,6 +21,7 @@ Gem::Specification.new do |s|
 
   s.add_runtime_dependency("nokogiri")
   s.add_runtime_dependency("awesome_print")
+  s.add_runtime_dependency("oauth2", ">= 0.5.2")
   s.add_runtime_dependency("mechanize")
   s.add_runtime_dependency("json")
   s.add_runtime_dependency("redis", "~> 2.2.1")
@@ -30,4 +31,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency("yard")
   s.add_development_dependency("rake")
   s.add_development_dependency("fakeweb")
+  s.add_development_dependency("webmock")
+  s.add_development_dependency("vcr", "2.0.0.rc1")
 end
