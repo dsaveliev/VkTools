@@ -1,3 +1,6 @@
+require 'oauth2'
+require 'mechanize'
+
 # @author Dmitry Savelev
 # Модуль реализует механизм авторизации в vkontakte.ru
 module VkTools::Auth
@@ -60,34 +63,57 @@ module VkTools::Auth
     # @option options [#to_s] :expires_in Срок жизни (в секундах) авторизации. Если не установлено - авторизация живет вечно, но не больше чем срок жизни токена на ВКонтакте
      # @return [Hash] Данные авторизации, в т.ч. :access_token, :cookie, :vk_user_id
     def inner_authorize(login, password, options = {})
-      redirect_uri = CGI.escape("http://api.vkontakte.ru/blank.html")
+      
+      @client = OAuth2::Client.new(
+        VkTools.client_id,
+        VkTools.client_secret,
+        :site          => 'https://api.vk.com/',
+        :token_url     => '/oauth/token',
+        :authorize_url => '/oauth/authorize' 
+      )
+      auth_url = @client.auth_code.authorize_url(
+        :redirect_uri => 'http://api.vk.com/blank.html',
+        :scope        => '16383',
+        :display      => 'wap'
+      )
+      agent = Mechanize.new{|a| a.user_agent_alias = 'Opera/9.80 (X11; Linux x86_64; U; ru) Presto/2.10.229 Version/11.61'}
+      auth_data = nil
 
-      path = "http://api.vkontakte.ru/oauth/authorize?client_id=#{VkTools.client_id}&redirect_uri=#{redirect_uri}&display=wap&scope=16383&response_type=code"
-      agent = Mechanize.new
-      page = agent.get(path)
-      form = page.forms.first
-      if !!form
-        form.email = login
-        form.pass = password
-        page = agent.submit(form, form.buttons.first)
+      begin
+        login_page = agent.get(auth_url)
+        login_form = login_page.forms.first
+        login_form.email = login
+        login_form.pass  = password
+        
+        verify_page = login_form.submit
+        
+        if verify_page.uri.path == '/oauth/authorize'
+          if /m=4/.match(verify_page.uri.query)
+            raise VkTools::ResponseError, "Authentification problem"
+          elsif /s=1/.match(verify_page.uri.query)
+            grant_access_page = verify_page.forms.first.submit
+          end
+        else
+          grant_access_page = verify_page
+        end
+        
+        code = grant_access_page.uri.to_s[/.*code=(.*)&?.*/, 1]
+        @access_token = @client.auth_code.get_token(code)
+        auth_data = {
+          :access_token => @access_token.token,
+          :vk_user_id => @access_token.params["user_id"],
+          :expires_in => @access_token.expires_in
+        }
+      rescue Exception => exc
+        log_exception(exc)
+        return
       end
-      unless page.uri.to_s.include?('code=')
-        form = page.forms.first
-        page = agent.submit(form, form.buttons.first)
-      end
-      cookie_jar = agent.cookie_jar
-      cookie = { :cookie => cookie_jar.dump_cookies }
-      code = page.uri.to_s[/code=(.*)/, 1]
-      auth_data = get_access_token(code)
+      
       return unless auth_data
-
-      auth_data.merge!(cookie)
-
+      auth_data.merge!(get_cookies(agent, login, password))
       remember_identity(auth_data, options) if options[:identity].present?
-
       auth_data
     end
-
 
     # Есть ли запомненная авторизация для указанного ident
     # @param [#to_s] ident Что-то, что уникально и переносимо идентифицирует пользователя среди множества проектов (например msisdn)
@@ -113,35 +139,14 @@ module VkTools::Auth
 
     protected
 
-    def get_access_token(code)
-      return unless code && !code.empty?
-      http = Net::HTTP.new('api.vk.com', 443)
-      http.use_ssl = true
-      path = '/oauth/token'
-      data = "client_id=#{VkTools.client_id}&\
-              client_secret=#{VkTools.client_secret}&\
-              code=#{code}"
-      headers = {'Content-Type' => 'application/x-www-form-urlencoded'}
-
-      begin
-        resp, data = http.post(path, data, headers)
-        unless resp.code_type == Net::HTTPOK
-          raise VkTools::ConnectionError, "Bad response from api.vk.com: #{resp.code}"
-        end
-        attributes = JSON.parse(data)
-
-        if attributes.has_key?("error")
-          raise VkTools::ResponseError, "Authentification problem: #{attributes['error']}"
-        end
-        {
-          :access_token => attributes['access_token'],
-          :vk_user_id => attributes['user_id'],
-          :expires_in => attributes['expires_in']
-        }
-      rescue Exception => exc
-        log_exception(exc)
-        return
-      end
+    def get_cookies(agent, login, password)
+      page = agent.get("http://m.vk.com/login")
+      form = page.forms.first
+      form.email = login
+      form.pass = password
+      page = agent.submit(form, form.buttons.first)
+      cookie_jar = agent.cookie_jar
+      cookie = { :cookie => cookie_jar.dump_cookies }
     end
 
     def redis
