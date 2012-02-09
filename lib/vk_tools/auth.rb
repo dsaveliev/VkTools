@@ -76,7 +76,7 @@ module VkTools::Auth
         :scope        => '16383',
         :display      => 'wap'
       )
-      agent = Mechanize.new{|a| a.user_agent_alias = 'Opera/9.80 (X11; Linux x86_64; U; ru) Presto/2.10.229 Version/11.61'}
+      agent = Mechanize.new
       auth_data = nil
 
       begin
