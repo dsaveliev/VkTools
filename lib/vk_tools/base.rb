@@ -1,5 +1,5 @@
 # @author Dmitry Savelev
-# Модуль для вспомогалтельных методов
+# Модуль для вспомогательных методов
 module VkTools::Base
   # Логирование уровня info
   # @param [String] msg текст исключения
@@ -10,8 +10,7 @@ module VkTools::Base
   # @param [Exception, String] exc текст исключения или само исключение
   def log_exception(exc)
     message = "Exception: #{exc.class.to_s} : #{exc.message} \n #{exc.backtrace.join("\n")} \n"
-    puts message
-    VkTools.logger.error message if self.logger
+    VkTools.logger.error(message) if VkTools.logger
     raise exc
   end
 end
