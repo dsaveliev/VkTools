@@ -3,41 +3,6 @@ recorded_with: VCR 2.0.0.rc1
 http_interactions: 
 - request: 
     method: get
-    uri: https://api.vkontakte.ru/method/getUserInfo?access_token=
-    body: ""
-    headers: 
-      Accept: 
-      - "*/*"
-  response: 
-    status: 
-      code: 200
-      message: OK
-    headers: 
-      Vary: 
-      - Host
-      X-Powered-By: 
-      - PHP/5.3.3-7+squeeze3
-      Content-Type: 
-      - text/javascript; charset=utf-8
-      Date: 
-      - Tue, 31 Jan 2012 13:00:11 GMT
-      Content-Length: 
-      - "211"
-      Pragma: 
-      - no-cache
-      Server: 
-      - nginx/1.0.11
-      Set-Cookie: 
-      - remixchk=5; expires=Sat, 26-Jan-2013 22:01:22 GMT; path=/; domain=.vkontakte.ru
-      Cache-Control: 
-      - no-store
-      Connection: 
-      - keep-alive
-    body: "{\"error\":{\"error_code\":5,\"error_msg\":\"User authorization failed: no access_token passed.\",\"request_params\":[{\"key\":\"oauth\",\"value\":\"1\"},{\"key\":\"method\",\"value\":\"getUserInfo\"},{\"key\":\"access_token\",\"value\":\"\"}]}}"
-    http_version: 
-  recorded_at: Tue, 31 Jan 2012 13:00:11 GMT
-- request: 
-    method: get
     uri: https://api.vkontakte.ru/method/logger?access_token=
     body: ""
     headers: 
@@ -50,24 +15,59 @@ http_interactions:
     headers: 
       Vary: 
       - Host
-      X-Powered-By: 
-      - PHP/5.3.3-7+squeeze3
+      Pragma: 
+      - no-cache
+      Server: 
+      - nginx/1.0.11
+      Connection: 
+      - keep-alive
       Content-Type: 
       - text/javascript; charset=utf-8
       Date: 
       - Tue, 31 Jan 2012 13:00:11 GMT
       Content-Length: 
       - "206"
-      Pragma: 
-      - no-cache
-      Server: 
-      - nginx/1.0.11
       Set-Cookie: 
       - remixchk=5; expires=Fri, 25-Jan-2013 11:58:14 GMT; path=/; domain=.vkontakte.ru
       Cache-Control: 
       - no-store
-      Connection: 
-      - keep-alive
+      X-Powered-By: 
+      - PHP/5.3.3-7+squeeze3
     body: "{\"error\":{\"error_code\":5,\"error_msg\":\"User authorization failed: no access_token passed.\",\"request_params\":[{\"key\":\"oauth\",\"value\":\"1\"},{\"key\":\"method\",\"value\":\"logger\"},{\"key\":\"access_token\",\"value\":\"\"}]}}"
     http_version: 
   recorded_at: Tue, 31 Jan 2012 13:00:11 GMT
+- request: 
+    method: get
+    uri: https://api.vkontakte.ru/method/getUserInfo?access_token=
+    body: ""
+    headers: 
+      Accept: 
+      - "*/*"
+  response: 
+    status: 
+      code: 200
+      message: OK
+    headers: 
+      Vary: 
+      - Host
+      Pragma: 
+      - no-cache
+      Server: 
+      - nginx/1.0.11
+      Connection: 
+      - keep-alive
+      Date: 
+      - Fri, 23 Mar 2012 14:26:33 GMT
+      Content-Type: 
+      - application/json; charset=utf-8
+      Content-Length: 
+      - "211"
+      Set-Cookie: 
+      - remixchk=5; expires=Tue, 19-Mar-2013 04:22:56 GMT; path=/; domain=.vkontakte.ru
+      Cache-Control: 
+      - no-store
+      X-Powered-By: 
+      - PHP/5.3.3-7+squeeze7
+    body: "{\"error\":{\"error_code\":5,\"error_msg\":\"User authorization failed: no access_token passed.\",\"request_params\":[{\"key\":\"oauth\",\"value\":\"1\"},{\"key\":\"method\",\"value\":\"getUserInfo\"},{\"key\":\"access_token\",\"value\":\"\"}]}}"
+    http_version: 
+  recorded_at: Fri, 23 Mar 2012 14:26:33 GMT
