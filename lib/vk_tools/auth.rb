@@ -77,6 +77,8 @@ module VkTools::Auth
         :display      => 'wap'
       )
       agent = Mechanize.new
+      agent.http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+      
       auth_data = nil
 
       begin

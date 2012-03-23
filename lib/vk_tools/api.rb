@@ -100,11 +100,12 @@ class VkTools::Api
                         join('&')
       http = Net::HTTP.new(@service_adress, @service_port)
       http.use_ssl = @use_ssl
+      http.verify_mode = OpenSSL::SSL::VERIFY_NONE
       path = "#{@full_service_path}?#{query_string}"
 
 
-      resp, data = silence_warnings{ http.get(path) }
-
+      resp = silence_warnings{ http.get(path) }
+      data = resp.body
 
       unless resp.code_type == Net::HTTPOK
         message = "Bad response from #{@service_address}: #{resp.code}"
