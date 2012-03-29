@@ -34,9 +34,8 @@ class VkTools::Api
       response = send_request
       return response if response
     rescue Exception => exc
-      log_exception exc if method.to_s.ends_with?('!')
-      nil
-#      super
+      log_exception exc
+      raise if method.to_s.ends_with?('!')
     end
   end
 
