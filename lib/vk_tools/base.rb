@@ -11,6 +11,5 @@ module VkTools::Base
   def log_exception(exc)
     message = "Exception: #{exc.class.to_s} : #{exc.message} \n #{exc.backtrace.join("\n")} \n"
     VkTools.logger.error(message) if VkTools.logger
-    raise exc
   end
 end

@@ -11,10 +11,9 @@ class VkTools::Api
     @service_adress = params[:service_address] || "api.vkontakte.ru"
     @service_path = params[:service_path] || "/method"
     @service_port = params[:service_port] || 443
-    @use_ssl = params[:use_ssl] || true
-    @method_as_param = params[:method_as_param] || false
-
-    @ignore_exception = params[:ignore_exception] || false
+    @use_ssl = params.fetch(:use_ssl, true)
+    @method_as_param = params.fetch(:method_as_param, false)
+    @ignore_exception = params.fetch(:ignore_exception, false)
   end
 
   # Возвращение хэша с токеном
@@ -35,9 +34,8 @@ class VkTools::Api
       response = send_request
       return response if response
     rescue Exception => exc
-      log_exception exc if method.to_s.ends_with?('!')
-      nil
-#      super
+      log_exception exc
+      raise if method.to_s.ends_with?('!')
     end
   end
 
