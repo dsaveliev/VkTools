@@ -141,10 +141,12 @@ module VkTools::Auth
 
     def get_cookies(agent, login, password)
       page = agent.get("http://m.vk.com/login")
-      form = page.forms.first
-      form.email = login
-      form.pass = password
-      page = agent.submit(form, form.buttons.first)
+      if page.form
+        form = page.forms.first
+        form.email = login
+        form.pass = password
+        page = agent.submit(form, form.buttons.first)
+      end
       cookie_jar = agent.cookie_jar
       cookie = { :cookie => cookie_jar.dump_cookies }
     end
