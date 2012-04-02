@@ -67,9 +67,9 @@ module VkTools::Auth
       @client = OAuth2::Client.new(
         VkTools.client_id,
         VkTools.client_secret,
-        :site          => 'https://api.vk.com/',
-        :token_url     => '/oauth/token',
-        :authorize_url => '/oauth/authorize' 
+        :site          => 'https://oauth.vk.com/',
+        :token_url     => '/token',
+        :authorize_url => '/authorize' 
       )
       auth_url = @client.auth_code.authorize_url(
         :redirect_uri => 'http://api.vk.com/blank.html',
@@ -87,17 +87,28 @@ module VkTools::Auth
         
         verify_page = login_form.submit
         
-        if verify_page.uri.path == '/oauth/authorize'
-          if /m=4/.match(verify_page.uri.query)
-            raise VkTools::ResponseError, "Authentification problem"
-          elsif /s=1/.match(verify_page.uri.query)
-            grant_access_page = verify_page.forms.first.submit
-          end
-        else
-          grant_access_page = verify_page
+        # if verify_page.uri.path == '/oauth/authorize'
+        #   if /m=4/.match(verify_page.uri.query)
+        #     raise VkTools::ResponseError, "Authentification problem"
+        #   elsif /s=1/.match(verify_page.uri.query)
+        #     grant_access_page = verify_page.forms.first.submit
+        #   end
+        # else
+        #   grant_access_page = verify_page
+        # end
+        # 
+        # code = grant_access_page.uri.to_s[/.*code=(.*)&?.*/, 1]
+
+        code_regexp = /.*code=(.*)&?.*/
+
+        if not code_regexp.match(verify_page.uri.to_s)
+          errmsg = "Wrong login and/or password"
+          MproLogger.mlog(errmsg)
+          return errmsg
         end
-        
-        code = grant_access_page.uri.to_s[/.*code=(.*)&?.*/, 1]
+
+        code = verify_page.uri.to_s[/.*code=(.*)&?.*/, 1]
+
         @access_token = @client.auth_code.get_token(code)
         auth_data = {
           :access_token => @access_token.token,
