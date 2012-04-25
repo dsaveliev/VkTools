@@ -11,8 +11,9 @@ RSpec.configure do |config|
   VCR.configure do |c|
     c.cassette_library_dir = 'fixtures/vcr_cassettes'
     c.hook_into :webmock
-    c.default_cassette_options = { :record => :none,
-                                   :re_record_interval => 7.days }
+    c.default_cassette_options = { :record => :once }
+                                   # не будет работать, куки протухнут.
+                                   # :re_record_interval => 7.days }
   end
 
   def stub_any_request
