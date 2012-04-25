@@ -12,26 +12,26 @@ http_interactions:
       code: 200
       message: OK
     headers: 
-      Date: 
-      - Tue, 31 Jan 2012 13:00:11 GMT
-      Content-Length: 
-      - "206"
-      Server: 
-      - nginx/1.0.11
-      Pragma: 
-      - no-cache
-      Content-Type: 
-      - text/javascript; charset=utf-8
       Set-Cookie: 
       - remixchk=5; expires=Fri, 25-Jan-2013 11:58:14 GMT; path=/; domain=.vkontakte.ru
       Connection: 
       - keep-alive
-      Vary: 
-      - Host
-      X-Powered-By: 
-      - PHP/5.3.3-7+squeeze3
+      Content-Type: 
+      - text/javascript; charset=utf-8
+      Content-Length: 
+      - "206"
+      Date: 
+      - Tue, 31 Jan 2012 13:00:11 GMT
       Cache-Control: 
       - no-store
+      Server: 
+      - nginx/1.0.11
+      Pragma: 
+      - no-cache
+      X-Powered-By: 
+      - PHP/5.3.3-7+squeeze3
+      Vary: 
+      - Host
     body: "{\"error\":{\"error_code\":5,\"error_msg\":\"User authorization failed: no access_token passed.\",\"request_params\":[{\"key\":\"oauth\",\"value\":\"1\"},{\"key\":\"method\",\"value\":\"logger\"},{\"key\":\"access_token\",\"value\":\"\"}]}}"
     http_version: 
   recorded_at: Tue, 31 Jan 2012 13:00:11 GMT
@@ -47,27 +47,27 @@ http_interactions:
       code: 200
       message: OK
     headers: 
+      Set-Cookie: 
+      - remixchk=5; expires=Sat, 27-Apr-2013 18:11:48 GMT; path=/; domain=.vkontakte.ru
+      Connection: 
+      - keep-alive
+      Content-Type: 
+      - application/json; charset=utf-8
       Content-Length: 
       - "211"
       Date: 
-      - Thu, 29 Mar 2012 14:07:54 GMT
-      Server: 
-      - nginx/1.0.11
-      Content-Type: 
-      - application/json; charset=utf-8
-      Set-Cookie: 
-      - remixchk=5; expires=Mon, 25-Mar-2013 02:13:24 GMT; path=/; domain=.vkontakte.ru
-      Pragma: 
-      - no-cache
-      Connection: 
-      - keep-alive
-      Vary: 
-      - Host
-      X-Powered-By: 
-      - PHP/5.3.3-7+squeeze3
+      - Wed, 25 Apr 2012 07:02:33 GMT
       Cache-Control: 
       - no-store
+      Server: 
+      - nginx/1.0.11
+      Pragma: 
+      - no-cache
+      X-Powered-By: 
+      - PHP/5.3.3-7+squeeze3
+      Vary: 
+      - Host
     body: "{\"error\":{\"error_code\":5,\"error_msg\":\"User authorization failed: no access_token passed.\",\"request_params\":[{\"key\":\"oauth\",\"value\":\"1\"},{\"key\":\"method\",\"value\":\"getUserInfo\"},{\"key\":\"access_token\",\"value\":\"\"}]}}"
     http_version: 
-  recorded_at: Thu, 29 Mar 2012 14:07:54 GMT
+  recorded_at: Wed, 25 Apr 2012 07:02:35 GMT
 recorded_with: VCR 2.0.0.rc1

@@ -3,7 +3,7 @@ recorded_with: VCR 2.0.0.rc1
 http_interactions: 
 - request: 
     method: get
-    uri: https://api.vkontakte.ru/method/getUserInfo?access_token=fdecbb0bfe76d2affe76d2afb8fe69eb90ffe76fe76ed50f838aad6eacb69b2
+    uri: https://api.vkontakte.ru/method/getUserInfo?access_token=2ed9ab562d1c2a7b2d1c2a7bb92d03134422d1c2d1c1584bc9d4316d59fe333
     body: ""
     headers: 
       Accept: 
@@ -13,26 +13,26 @@ http_interactions:
       code: 200
       message: OK
     headers: 
+      Content-Length: 
+      - "52"
+      X-Powered-By: 
+      - PHP/5.3.3-7+squeeze3
+      Cache-Control: 
+      - no-store
+      Date: 
+      - Wed, 25 Apr 2012 07:30:02 GMT
+      Server: 
+      - nginx/1.0.11
       Vary: 
       - Host
       Pragma: 
       - no-cache
-      Server: 
-      - nginx/1.0.11
-      Connection: 
-      - keep-alive
-      Date: 
-      - Fri, 23 Mar 2012 14:26:32 GMT
       Content-Type: 
       - application/json; charset=utf-8
-      Content-Length: 
-      - "52"
       Set-Cookie: 
-      - remixchk=5; expires=Fri, 15-Mar-2013 07:40:22 GMT; path=/; domain=.vkontakte.ru
-      Cache-Control: 
-      - no-store
-      X-Powered-By: 
-      - PHP/5.3.3-7+squeeze7
-    body: "{\"response\":{\"user_id\":\"60451236\",\"user_name\":null}}"
+      - remixchk=5; expires=Wed, 17-Apr-2013 12:57:22 GMT; path=/; domain=.vkontakte.ru
+      Connection: 
+      - keep-alive
+    body: "{\"response\":{\"user_id\":\"63275309\",\"user_name\":null}}"
     http_version: 
-  recorded_at: Fri, 23 Mar 2012 14:26:32 GMT
+  recorded_at: Wed, 25 Apr 2012 07:30:02 GMT
