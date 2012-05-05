@@ -33,4 +33,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency("fakeweb")
   s.add_development_dependency("webmock")
   s.add_development_dependency("vcr", "2.0.0.rc1")
+  s.add_development_dependency("pry")
 end

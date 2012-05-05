@@ -7,8 +7,8 @@ describe VkTools do
     described_class.redis_options = {:host => 'localhost', :db => 0} #Пишем в "помойку" - :db => 0, чтобы не запороть случайно данные сервисов
     described_class.send(:redis).flushdb
 
-    @token = "fdecbb0bfe76d2affe76d2afb8fe69eb90ffe76fe76ed50f838aad6eacb69b2"
-    @cookie = "login.vk.com\tFALSE\t/\tFALSE\t1359221530\tl\t60451236\nlogin.vk.com\tFALSE\t/\tFALSE\t1360038869\tp\t85951f06bf294db366a916ef35f996678c24\nlogin.vk.com\tFALSE\t/\tFALSE\t1359453517\ts\t1\nvk.com\tFALSE\t/\tFALSE\t1359242704\tremixlang\t0\nvk.com\tFALSE\t/\tFALSE\t1359505589\tremixsid\t142e466aee83ed0997d76ec0ebc8407bffe5cf3f740fbbc6d19853b4cb4a\nvk.com\tFALSE\t/\tFALSE\t1359157249\tremixchk\t5\n"  
+    @token = "2ed9ab562d1c2a7b2d1c2a7bb92d03134422d1c2d1c1584bc9d4316d59fe333"
+    @cookie = "login.vk.com\tTRUE\t/\tFALSE\t1366983703\ts\t1\t\nlogin.vk.com\tTRUE\t/\tFALSE\t1366582911\tl\t63275309\t\nlogin.vk.com\tTRUE\t/\tFALSE\t1366432547\tp\t85ebd2974b73a2583c0bc2ae17a447a06bd3\t\nvk.com\tTRUE\t/\tFALSE\t1365531050\tremixlang\t0\t\nvk.com\tTRUE\t/\tFALSE\t1365631286\tremixchk\t5\t\nvk.com\tTRUE\t/\tFALSE\t1366971375\tremixsid\t4bd579ec39a5777af0ddaa031c42f868fa7f43130b3ee1fda60f936d6f17"  
     @vk_user_id = "60451236"
     @auth_data = {
       :access_token => @token,
@@ -23,7 +23,7 @@ describe VkTools do
   context ".authorize" do
     specify "авторизует пользователя на вконтакте по логину/паролю" do
       VCR.use_cassette('test_api', 
-                     :record => :new_episodes,
+                     # :record => :new_episodes,
                      :allow_playback_repeats => true) do
         @api.getUserInfo['user_id'].should_not be_nil
       end
