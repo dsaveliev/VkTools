@@ -118,8 +118,6 @@ module VkTools::Auth
           :expires_in => @access_token.expires_in
         }
       rescue Exception => exc
-        require 'pry'
-        binding.pry
         log_exception(exc)
         return []
       end
