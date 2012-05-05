@@ -77,7 +77,7 @@ module VkTools::Auth
         :display      => 'wap'
       )
       agent = Mechanize.new
-      agent.http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+      # agent.http.verify_mode = OpenSSL::SSL::VERIFY_NONE
       
       auth_data = nil
 
@@ -118,8 +118,10 @@ module VkTools::Auth
           :expires_in => @access_token.expires_in
         }
       rescue Exception => exc
+        require 'pry'
+        binding.pry
         log_exception(exc)
-        return
+        return []
       end
       
       return unless auth_data
@@ -164,8 +166,7 @@ module VkTools::Auth
           agent.submit(form, form.buttons.first)
         end
       end
-      cookie_jar = agent.cookie_jar
-      cookie = { :cookie => cookie_jar.dump_cookies }
+      cookie = { :cookie => VkTools::Cookies.to_s(agent.cookie_jar) }
     end
 
     def redis

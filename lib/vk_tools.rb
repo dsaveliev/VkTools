@@ -1,6 +1,5 @@
 require 'rubygems'
 require 'mechanize'
-require 'patch/mechanize'
 require 'ap'
 require 'active_support'
 require 'active_support/all'
@@ -14,8 +13,9 @@ module VkTools
   autoload :Api
   autoload :Auth
   autoload :Pages
+  autoload :Cookies
 
-  include Auth
+  include VkTools::Auth
   # Родительский класс - исключение
   class Error < ::Exception; end
   # Класс - исключение, вызывается при проблемах с подключением к серверу

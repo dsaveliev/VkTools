@@ -8,7 +8,7 @@ class VkTools::Api
   def initialize(params = {})
     @access_token = params[:access_token]
     @service_name = params[:service_name] || "VkApi"
-    @service_adress = params[:service_address] || "api.vkontakte.ru"
+    @service_adress = params[:service_address] || "api.vk.com"
     @service_path = params[:service_path] || "/method"
     @service_port = params[:service_port] || 443
     @use_ssl = params.fetch(:use_ssl, true)
@@ -102,7 +102,6 @@ class VkTools::Api
       http.verify_mode = OpenSSL::SSL::VERIFY_NONE
       path = "#{@full_service_path}?#{query_string}"
 
-
       resp = silence_warnings{ http.get(path) }
       data = resp.body
 
@@ -111,8 +110,11 @@ class VkTools::Api
         raise VkTools::ConnectionError, message
       end
 
-      return data unless data =~ /^[\{|\[].*[\}|\]]$/
-      attributes = JSON.parse(data)
+      begin
+        attributes = JSON.parse(data)
+      rescue Exception => exc
+        return data
+      end
 
       attributes.keys.each do |key|
         raise_exception(attributes[key].clone) if key.to_s =~ /.*error.*/

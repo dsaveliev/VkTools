@@ -9,7 +9,7 @@ class VkTools::Pages
     @cookie = params[:cookie]
     @agent = Mechanize.new
     @cookie_jar = @agent.cookie_jar
-    @cookie_jar.load_cookies(@cookie)
+    VkTools::Cookies.to_jar(@cookie, @cookie_jar)
   end
 
   # Делает get запрос по указанному адресу
@@ -52,7 +52,7 @@ class VkTools::Pages
   # Возвращение хэша с cookies
   # @return [Hash] возврщает хэш с cookies (:cookie)
   def to_hash
-    { :cookie => @cookie_jar.dump_cookies }
+    { :cookie => VkTools::Cookies.to_s(@cookie_jar) }
   end
 end
 
