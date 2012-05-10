@@ -1,73 +1,121 @@
---- 
-http_interactions: 
-- request: 
+---
+http_interactions:
+- request:
     method: get
     uri: https://api.vkontakte.ru/method/logger?access_token=
-    body: ""
-    headers: 
-      Accept: 
-      - "*/*"
-  response: 
-    status: 
+    body: ''
+    headers:
+      Accept:
+      - ! '*/*'
+  response:
+    status:
       code: 200
       message: OK
-    headers: 
-      Set-Cookie: 
+    headers:
+      Set-Cookie:
       - remixchk=5; expires=Fri, 25-Jan-2013 11:58:14 GMT; path=/; domain=.vkontakte.ru
-      Connection: 
+      Connection:
       - keep-alive
-      Content-Type: 
+      Content-Type:
       - text/javascript; charset=utf-8
-      Content-Length: 
-      - "206"
-      Date: 
+      Content-Length:
+      - '206'
+      Date:
       - Tue, 31 Jan 2012 13:00:11 GMT
-      Cache-Control: 
+      Cache-Control:
       - no-store
-      Server: 
+      Server:
       - nginx/1.0.11
-      Pragma: 
+      Pragma:
       - no-cache
-      X-Powered-By: 
+      X-Powered-By:
       - PHP/5.3.3-7+squeeze3
-      Vary: 
+      Vary:
       - Host
-    body: "{\"error\":{\"error_code\":5,\"error_msg\":\"User authorization failed: no access_token passed.\",\"request_params\":[{\"key\":\"oauth\",\"value\":\"1\"},{\"key\":\"method\",\"value\":\"logger\"},{\"key\":\"access_token\",\"value\":\"\"}]}}"
-    http_version: 
+    body: ! '{"error":{"error_code":5,"error_msg":"User authorization failed: no access_token
+      passed.","request_params":[{"key":"oauth","value":"1"},{"key":"method","value":"logger"},{"key":"access_token","value":""}]}}'
+    http_version: !!null 
   recorded_at: Tue, 31 Jan 2012 13:00:11 GMT
-- request: 
+- request:
     method: get
     uri: https://api.vkontakte.ru/method/getUserInfo?access_token=
-    body: ""
-    headers: 
-      Accept: 
-      - "*/*"
-  response: 
-    status: 
+    body: ''
+    headers:
+      Accept:
+      - ! '*/*'
+  response:
+    status:
       code: 200
       message: OK
-    headers: 
-      Set-Cookie: 
+    headers:
+      Set-Cookie:
       - remixchk=5; expires=Sat, 27-Apr-2013 18:11:48 GMT; path=/; domain=.vkontakte.ru
-      Connection: 
+      Connection:
       - keep-alive
-      Content-Type: 
+      Content-Type:
       - application/json; charset=utf-8
-      Content-Length: 
-      - "211"
-      Date: 
+      Content-Length:
+      - '211'
+      Date:
       - Wed, 25 Apr 2012 07:02:33 GMT
-      Cache-Control: 
+      Cache-Control:
       - no-store
-      Server: 
+      Server:
       - nginx/1.0.11
-      Pragma: 
+      Pragma:
       - no-cache
-      X-Powered-By: 
+      X-Powered-By:
       - PHP/5.3.3-7+squeeze3
-      Vary: 
+      Vary:
       - Host
-    body: "{\"error\":{\"error_code\":5,\"error_msg\":\"User authorization failed: no access_token passed.\",\"request_params\":[{\"key\":\"oauth\",\"value\":\"1\"},{\"key\":\"method\",\"value\":\"getUserInfo\"},{\"key\":\"access_token\",\"value\":\"\"}]}}"
-    http_version: 
+    body: ! '{"error":{"error_code":5,"error_msg":"User authorization failed: no access_token
+      passed.","request_params":[{"key":"oauth","value":"1"},{"key":"method","value":"getUserInfo"},{"key":"access_token","value":""}]}}'
+    http_version: !!null 
   recorded_at: Wed, 25 Apr 2012 07:02:35 GMT
+- request:
+    method: get
+    uri: https://api.vk.com/method/getUserInfo?access_token=
+    body: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.0.11
+      Date:
+      - Thu, 10 May 2012 08:37:35 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Connection:
+      - keep-alive
+      Vary:
+      - Host,Accept-Encoding
+      X-Powered-By:
+      - PHP/5.3.3-7+squeeze7
+      Set-Cookie:
+      - remixchk=5; expires=Sun, 12-May-2013 16:12:54 GMT; path=/; domain=.vk.com
+      - remixlang=0; expires=Wed, 08-May-2013 20:29:45 GMT; path=/; domain=.vk.com
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-store
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '164'
+    body: !binary |-
+      H4sIAAAAAAAAA0yNQQrCMBBFrxJmHQQXbnIDD+BKJAzNtIa2mTqTClpyd1NU
+      yO5//uO/DUiEBdz2Db7jQOBO9ldnHcDBRUkMrvnOEt+YIyfTY5woOJPYYNeR
+      qs88UjILqlI4gAWhx0qa/YKCs4K7bjDSq77x/lSBJ05rdcERiv1vM1VJaMaB
+      8m4/p54brFU2MJRbKR8AAAD//wMAaw4RSNMAAAA=
+    http_version: !!null 
+  recorded_at: Thu, 10 May 2012 08:37:35 GMT
 recorded_with: VCR 2.0.0.rc1

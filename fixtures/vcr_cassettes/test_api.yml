@@ -1,38 +1,681 @@
---- 
-recorded_with: VCR 2.0.0.rc1
-http_interactions: 
-- request: 
+---
+http_interactions:
+- request:
     method: get
-    uri: https://api.vkontakte.ru/method/getUserInfo?access_token=2ed9ab562d1c2a7b2d1c2a7bb92d03134422d1c2d1c1584bc9d4316d59fe333
-    body: ""
-    headers: 
-      Accept: 
-      - "*/*"
-  response: 
-    status: 
+    uri: https://oauth.vk.com/authorize?client_id=2046271&display=wap&redirect_uri=http://api.vk.com/blank.html&response_type=code&scope=16383
+    body: ''
+    headers:
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Mechanize/2.4 Ruby/1.9.2p290 (http://github.com/tenderlove/mechanize/)
+      Accept-Encoding:
+      - gzip,deflate,identity
+      Accept-Charset:
+      - ISO-8859-1,utf-8;q=0.7,*;q=0.7
+      Accept-Language:
+      - en-us,en;q=0.5
+      Host:
+      - oauth.vk.com
+      Connection:
+      - keep-alive
+      Keep-Alive:
+      - 300
+  response:
+    status:
+      code: 302
+      message: Found
+    headers:
+      Server:
+      - nginx/1.0.11
+      Date:
+      - Thu, 10 May 2012 09:03:37 GMT
+      Content-Type:
+      - text/html; charset=windows-1251
+      Connection:
+      - keep-alive
+      X-Powered-By:
+      - PHP/5.3.3-7+squeeze3
+      Set-Cookie:
+      - remixchk=5; expires=Sun, 05-May-2013 16:34:12 GMT; path=/; domain=.vk.com
+      - remixlang=3; expires=Fri, 03-May-2013 13:54:48 GMT; path=/; domain=.vk.com
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-store
+      Location:
+      - https://login.vk.com/?from_host=oauth.vk.com&from_protocol=https&ip_h=b0ca6091fb555296e6&soft=1&to=aHR0cHM6Ly9vYXV0aC52ay5jb20vb2F1dGgvYXV0aG9yaXplP3Jlc3BvbnNlX3R5cGU9Y29kZSZjbGllbnRfaWQ9MjA0NjI3MSZyZWRpcmVjdF91cmk9aHR0cCUzQSUyRiUyRmFwaS52ay5jb20lMkZibGFuay5odG1sJnNjb3BlPTE2MzgzJmRpc3BsYXk9d2Fw
+      Content-Encoding:
+      - gzip
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '26'
+    body: !binary |-
+      H4sIAAAAAAAAAwIAAAD//wMAAAAAAAAAAAA=
+    http_version: !!null 
+  recorded_at: Thu, 10 May 2012 09:03:37 GMT
+- request:
+    method: get
+    uri: https://login.vk.com/?from_host=oauth.vk.com&from_protocol=https&ip_h=b0ca6091fb555296e6&soft=1&to=aHR0cHM6Ly9vYXV0aC52ay5jb20vb2F1dGgvYXV0aG9yaXplP3Jlc3BvbnNlX3R5cGU9Y29kZSZjbGllbnRfaWQ9MjA0NjI3MSZyZWRpcmVjdF91cmk9aHR0cCUzQSUyRiUyRmFwaS52ay5jb20lMkZibGFuay5odG1sJnNjb3BlPTE2MzgzJmRpc3BsYXk9d2Fw
+    body: ''
+    headers:
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Mechanize/2.4 Ruby/1.9.2p290 (http://github.com/tenderlove/mechanize/)
+      Accept-Encoding:
+      - gzip,deflate,identity
+      Accept-Charset:
+      - ISO-8859-1,utf-8;q=0.7,*;q=0.7
+      Accept-Language:
+      - en-us,en;q=0.5
+      Cookie:
+      - remixlang=3; remixchk=5
+      Host:
+      - login.vk.com
+      Connection:
+      - keep-alive
+      Keep-Alive:
+      - 300
+  response:
+    status:
+      code: 302
+      message: Found
+    headers:
+      Server:
+      - nginx/1.0.11
+      Date:
+      - Thu, 10 May 2012 09:03:47 GMT
+      Content-Type:
+      - text/html; charset=windows-1251
+      Connection:
+      - keep-alive
+      X-Powered-By:
+      - PHP/5.2.6-1+lenny3
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-store
+      P3p:
+      - CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"
+      Location:
+      - https://oauth.vk.com/oauth/authorize?response_type=code&client_id=2046271&redirect_uri=http%3A%2F%2Fapi.vk.com%2Fblank.html&scope=16383&display=wap&_hash=0
+      Content-Encoding:
+      - gzip
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '26'
+    body: !binary |-
+      H4sIAAAAAAAAAwIAAAD//wMAAAAAAAAAAAA=
+    http_version: !!null 
+  recorded_at: Thu, 10 May 2012 09:03:47 GMT
+- request:
+    method: get
+    uri: https://oauth.vk.com/oauth/authorize?_hash=0&client_id=2046271&display=wap&redirect_uri=http://api.vk.com/blank.html&response_type=code&scope=16383
+    body: ''
+    headers:
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Mechanize/2.4 Ruby/1.9.2p290 (http://github.com/tenderlove/mechanize/)
+      Accept-Encoding:
+      - gzip,deflate,identity
+      Accept-Charset:
+      - ISO-8859-1,utf-8;q=0.7,*;q=0.7
+      Accept-Language:
+      - en-us,en;q=0.5
+      Cookie:
+      - remixlang=3; remixchk=5
+      Host:
+      - oauth.vk.com
+      Connection:
+      - keep-alive
+      Keep-Alive:
+      - 300
+  response:
+    status:
       code: 200
       message: OK
-    headers: 
-      Content-Length: 
-      - "52"
-      X-Powered-By: 
-      - PHP/5.3.3-7+squeeze3
-      Cache-Control: 
-      - no-store
-      Date: 
-      - Wed, 25 Apr 2012 07:30:02 GMT
-      Server: 
+    headers:
+      Server:
       - nginx/1.0.11
-      Vary: 
-      - Host
-      Pragma: 
-      - no-cache
-      Content-Type: 
-      - application/json; charset=utf-8
-      Set-Cookie: 
-      - remixchk=5; expires=Wed, 17-Apr-2013 12:57:22 GMT; path=/; domain=.vkontakte.ru
-      Connection: 
+      Date:
+      - Thu, 10 May 2012 09:03:47 GMT
+      Content-Type:
+      - text/html; charset=UTF-8
+      Connection:
       - keep-alive
-    body: "{\"response\":{\"user_id\":\"63275309\",\"user_name\":null}}"
-    http_version: 
-  recorded_at: Wed, 25 Apr 2012 07:30:02 GMT
+      X-Powered-By:
+      - PHP/5.3.3-7+squeeze7
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-store
+      Set-Cookie:
+      - remixsid=nonenone; path=/; domain=.vk.com
+      Content-Encoding:
+      - gzip
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '1448'
+    body: !binary |-
+      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
+      lFz0/4MMAAA=
+    http_version: !!null 
+  recorded_at: Thu, 10 May 2012 09:03:47 GMT
+- request:
+    method: post
+    uri: https://login.vk.com/?act=login&soft=1&utf8=1
+    body: q=1&from_host=oauth.vk.com&from_protocol=https&ip_h=b0ca6091fb555296e6&to=aHR0cDovL29hdXRoLnZrLmNvbS9vYXV0aC9hdXRob3JpemU%2FY2xpZW50X2lkPTIwNDYyNzEmcmVkaXJlY3RfdXJpPWh0dHA6Ly9hcGkudmsuY29tL2JsYW5rLmh0bWwmcmVzcG9uc2VfdHlwZT1jb2RlJnNjb3BlPTE2MzgzJnN0YXRlPSZkaXNwbGF5PXdhcA--&email=nikolay_vasilev_1997%40mail.ru&pass=rfvtgb123
+    headers:
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Mechanize/2.4 Ruby/1.9.2p290 (http://github.com/tenderlove/mechanize/)
+      Accept-Encoding:
+      - gzip,deflate,identity
+      Accept-Charset:
+      - ISO-8859-1,utf-8;q=0.7,*;q=0.7
+      Accept-Language:
+      - en-us,en;q=0.5
+      Cookie:
+      - remixlang=3; remixchk=5; remixsid=nonenone
+      Host:
+      - login.vk.com
+      Referer:
+      - &70170202179500 !ruby/object:URI::HTTPS
+        scheme: https
+        user: !!null 
+        password: !!null 
+        host: oauth.vk.com
+        port: 443
+        path: /oauth/authorize
+        query: response_type=code&client_id=2046271&redirect_uri=http%3A%2F%2Fapi.vk.com%2Fblank.html&scope=16383&display=wap&_hash=0
+        opaque: !!null 
+        registry: !!null 
+        fragment: !!null 
+        parser: !!null 
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Content-Length:
+      - '324'
+      Connection:
+      - keep-alive
+      Keep-Alive:
+      - 300
+  response:
+    status:
+      code: 302
+      message: Found
+    headers:
+      Server:
+      - nginx/1.0.11
+      Date:
+      - Thu, 10 May 2012 09:03:58 GMT
+      Content-Type:
+      - text/html; charset=windows-1251
+      Connection:
+      - keep-alive
+      X-Powered-By:
+      - PHP/5.3.3-7+squeeze8
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-store
+      P3p:
+      - CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"
+      Set-Cookie:
+      - l=172293099; expires=Sat, 11-May-2013 15:31:54 GMT; path=/; domain=login.vk.com
+      - p=754a44cb5d8f1ec7d34006e84539e787fca0; expires=Sun, 12-May-2013 12:12:34
+        GMT; path=/; domain=login.vk.com
+      - s=1; expires=Fri, 10-May-2013 09:41:05 GMT; path=/; domain=login.vk.com
+      Location:
+      - http://oauth.vk.com/oauth/authorize?client_id=2046271&redirect_uri=http://api.vk.com/blank.html&response_type=code&scope=16383&state=&display=wap&hash=c5e79b7e84400b81381fbcda9dff82a6&s=1
+      Content-Encoding:
+      - gzip
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '26'
+    body: !binary |-
+      H4sIAAAAAAAAAwIAAAD//wMAAAAAAAAAAAA=
+    http_version: !!null 
+  recorded_at: Thu, 10 May 2012 09:03:58 GMT
+- request:
+    method: get
+    uri: http://oauth.vk.com/oauth/authorize?client_id=2046271&display=wap&hash=c5e79b7e84400b81381fbcda9dff82a6&redirect_uri=http://api.vk.com/blank.html&response_type=code&s=1&scope=16383&state=
+    body: ''
+    headers:
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Mechanize/2.4 Ruby/1.9.2p290 (http://github.com/tenderlove/mechanize/)
+      Accept-Encoding:
+      - gzip,deflate,identity
+      Accept-Charset:
+      - ISO-8859-1,utf-8;q=0.7,*;q=0.7
+      Accept-Language:
+      - en-us,en;q=0.5
+      Cookie:
+      - remixlang=3; remixchk=5; remixsid=nonenone
+      Host:
+      - oauth.vk.com
+      Connection:
+      - keep-alive
+      Keep-Alive:
+      - 300
+  response:
+    status:
+      code: 302
+      message: Found
+    headers:
+      Server:
+      - nginx/1.0.11
+      Date:
+      - Thu, 10 May 2012 09:05:14 GMT
+      Content-Type:
+      - text/html; charset=windows-1251
+      Connection:
+      - keep-alive
+      X-Powered-By:
+      - PHP/5.3.3-7+squeeze3
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-store
+      P3p:
+      - CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"
+      Set-Cookie:
+      - remixreg_sid=deleted; expires=Wed, 11-May-2011 09:05:13 GMT; path=/; domain=.vk.com
+      - remixsid=4635c3ed96e6d2b3a56a11a88d79d14d93f1f5b2afde57d3ca22e2b60cea; expires=Wed,
+        15-May-2013 04:29:43 GMT; path=/; domain=.vk.com
+      Location:
+      - https://oauth.vk.com/grant_access?hash=c4068a6e31eaa51d52&client_id=2046271&settings=16383&redirect_uri=http://api.vk.com/blank.html&response_type=code&direct_hash=d8bf03dde3215387f9&token_type=0&notify=1
+      Content-Encoding:
+      - gzip
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '26'
+    body: !binary |-
+      H4sIAAAAAAAAAwIAAAD//wMAAAAAAAAAAAA=
+    http_version: !!null 
+  recorded_at: Thu, 10 May 2012 09:05:14 GMT
+- request:
+    method: get
+    uri: https://oauth.vk.com/grant_access?client_id=2046271&direct_hash=d8bf03dde3215387f9&hash=c4068a6e31eaa51d52&notify=1&redirect_uri=http://api.vk.com/blank.html&response_type=code&settings=16383&token_type=0
+    body: ''
+    headers:
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Mechanize/2.4 Ruby/1.9.2p290 (http://github.com/tenderlove/mechanize/)
+      Accept-Encoding:
+      - gzip,deflate,identity
+      Accept-Charset:
+      - ISO-8859-1,utf-8;q=0.7,*;q=0.7
+      Accept-Language:
+      - en-us,en;q=0.5
+      Cookie:
+      - remixlang=3; remixchk=5; remixsid=4635c3ed96e6d2b3a56a11a88d79d14d93f1f5b2afde57d3ca22e2b60cea
+      Host:
+      - oauth.vk.com
+      Referer:
+      - *70170202179500
+      Connection:
+      - keep-alive
+      Keep-Alive:
+      - 300
+  response:
+    status:
+      code: 302
+      message: Found
+    headers:
+      Server:
+      - nginx/1.0.11
+      Date:
+      - Thu, 10 May 2012 09:05:14 GMT
+      Content-Type:
+      - text/html; charset=windows-1251
+      Connection:
+      - keep-alive
+      X-Powered-By:
+      - PHP/5.3.3-7+squeeze7
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-store
+      Set-Cookie:
+      - remixlang=0; expires=Thu, 02-May-2013 20:00:46 GMT; path=/; domain=.vk.com
+      Location:
+      - http://api.vk.com/blank.html?code=fde23ad53213b94624
+      Content-Encoding:
+      - gzip
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '26'
+    body: !binary |-
+      H4sIAAAAAAAAAwIAAAD//wMAAAAAAAAAAAA=
+    http_version: !!null 
+  recorded_at: Thu, 10 May 2012 09:05:14 GMT
+- request:
+    method: get
+    uri: http://api.vk.com/blank.html?code=fde23ad53213b94624
+    body: ''
+    headers:
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Mechanize/2.4 Ruby/1.9.2p290 (http://github.com/tenderlove/mechanize/)
+      Accept-Encoding:
+      - gzip,deflate,identity
+      Accept-Charset:
+      - ISO-8859-1,utf-8;q=0.7,*;q=0.7
+      Accept-Language:
+      - en-us,en;q=0.5
+      Cookie:
+      - remixchk=5; remixsid=4635c3ed96e6d2b3a56a11a88d79d14d93f1f5b2afde57d3ca22e2b60cea;
+        remixlang=0
+      Host:
+      - api.vk.com
+      Connection:
+      - keep-alive
+      Keep-Alive:
+      - 300
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.0.11
+      Date:
+      - Thu, 10 May 2012 09:05:24 GMT
+      Content-Type:
+      - text/html
+      Content-Length:
+      - '342'
+      Last-Modified:
+      - Mon, 02 Apr 2012 07:28:14 GMT
+      Connection:
+      - keep-alive
+      Expires:
+      - Thu, 10 May 2012 10:05:24 GMT
+      Cache-Control:
+      - max-age=3600
+      Accept-Ranges:
+      - bytes
+    body: ! "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\"\n   \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">\n<html
+      xmlns=\"http://www.w3.org/1999/xhtml\">\n   <head>\n      <meta http-equiv=\"content-type\"
+      content=\"text/html; charset=windows-1251\" />\n      <title>OAuth Blank</title>\n
+      \  </head>\n   <body>\n     Login success\n   </body>\n</html>\n"
+    http_version: !!null 
+  recorded_at: Thu, 10 May 2012 09:05:24 GMT
+- request:
+    method: post
+    uri: https://oauth.vk.com/token
+    body: grant_type=authorization_code&code=fde23ad53213b94624&client_id=2046271&client_secret=N1wu3hhKJ9HGsjuN7pfS
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.0.11
+      Date:
+      - Thu, 10 May 2012 09:05:25 GMT
+      Content-Type:
+      - application/json
+      Connection:
+      - keep-alive
+      X-Powered-By:
+      - PHP/5.3.3-7+squeeze3
+      Set-Cookie:
+      - remixchk=5; expires=Wed, 15-May-2013 16:25:44 GMT; path=/; domain=.vk.com
+      - remixlang=0; expires=Thu, 16-May-2013 07:14:43 GMT; path=/; domain=.vk.com
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - '117'
+    body: ! '{"access_token":"358864623fcc9f893fcc9f89a73fd3a6b633fcc3fcca07608b07ca213afbf89","expires_in":0,"user_id":172293099}'
+    http_version: !!null 
+  recorded_at: Thu, 10 May 2012 09:05:25 GMT
+- request:
+    method: get
+    uri: http://m.vk.com/login
+    body: ''
+    headers:
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Mechanize/2.4 Ruby/1.9.2p290 (http://github.com/tenderlove/mechanize/)
+      Accept-Encoding:
+      - gzip,deflate,identity
+      Accept-Charset:
+      - ISO-8859-1,utf-8;q=0.7,*;q=0.7
+      Accept-Language:
+      - en-us,en;q=0.5
+      Cookie:
+      - remixchk=5; remixsid=4635c3ed96e6d2b3a56a11a88d79d14d93f1f5b2afde57d3ca22e2b60cea;
+        remixlang=0
+      Host:
+      - m.vk.com
+      Connection:
+      - keep-alive
+      Keep-Alive:
+      - 300
+  response:
+    status:
+      code: 302
+      message: Found
+    headers:
+      Server:
+      - nginx/1.0.11
+      Date:
+      - Thu, 10 May 2012 09:05:37 GMT
+      Content-Type:
+      - text/html; charset=windows-1251
+      Connection:
+      - keep-alive
+      Vary:
+      - Host,Accept-Encoding
+      X-Powered-By:
+      - PHP/5.3.3-7+squeeze7
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-store
+      Location:
+      - /
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '26'
+    body: !binary |-
+      H4sIAAAAAAAAAwIAAAD//wMAAAAAAAAAAAA=
+    http_version: !!null 
+  recorded_at: Thu, 10 May 2012 09:05:37 GMT
+- request:
+    method: get
+    uri: http://m.vk.com/
+    body: ''
+    headers:
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Mechanize/2.4 Ruby/1.9.2p290 (http://github.com/tenderlove/mechanize/)
+      Accept-Encoding:
+      - gzip,deflate,identity
+      Accept-Charset:
+      - ISO-8859-1,utf-8;q=0.7,*;q=0.7
+      Accept-Language:
+      - en-us,en;q=0.5
+      Cookie:
+      - remixchk=5; remixsid=4635c3ed96e6d2b3a56a11a88d79d14d93f1f5b2afde57d3ca22e2b60cea;
+        remixlang=0
+      Host:
+      - m.vk.com
+      Connection:
+      - keep-alive
+      Keep-Alive:
+      - 300
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.0.11
+      Date:
+      - Thu, 10 May 2012 09:05:37 GMT
+      Content-Type:
+      - text/html; charset=utf-8
+      Connection:
+      - keep-alive
+      Vary:
+      - Host,Accept-Encoding
+      X-Powered-By:
+      - PHP/5.3.3-7+squeeze3
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-store
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '1882'
+    body: !binary |-
+      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
+    http_version: !!null 
+  recorded_at: Thu, 10 May 2012 09:05:37 GMT
+- request:
+    method: get
+    uri: https://api.vk.com/method/getUserInfoEx?access_token=358864623fcc9f893fcc9f89a73fd3a6b633fcc3fcca07608b07ca213afbf89
+    body: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.0.11
+      Date:
+      - Thu, 10 May 2012 09:05:47 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Connection:
+      - keep-alive
+      Vary:
+      - Host,Accept-Encoding
+      X-Powered-By:
+      - PHP/5.3.3-7+squeeze3
+      Set-Cookie:
+      - remixchk=5; expires=Thu, 02-May-2013 21:58:56 GMT; path=/; domain=.vk.com
+      - remixlang=0; expires=Sun, 05-May-2013 03:50:03 GMT; path=/; domain=.vk.com
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-store
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '113'
+    body: !binary |-
+      H4sIAAAAAAAAA6pWKkotLsjPK05VsqpWKi1OLYrPTFGyUjI0NzKyNDawtFTS
+      gYjmJeYClShdmHthx4VdF/Zd2H1hw4WdChcmXdhwsREotPtiz4WtFzbBVBen
+      VgAVGynV1gIAAAD//wMA8ssMjWEAAAA=
+    http_version: !!null 
+  recorded_at: Thu, 10 May 2012 09:05:47 GMT
+recorded_with: VCR 2.0.0.rc1

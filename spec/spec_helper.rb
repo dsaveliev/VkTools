@@ -2,7 +2,6 @@ require 'bundler/setup'
 require 'vk_tools'
 require 'rspec/core'
 require 'vcr'
-require 'lib/vk_tools'
 
 RSpec.configure do |config|
   # == Mock Framework

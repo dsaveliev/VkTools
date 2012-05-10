@@ -20,13 +20,12 @@ describe VkTools do
     @pages = VkTools::Pages.new :cookie => @cookie
   end
 
-
   context ".authorize" do
     specify "авторизует пользователя на вконтакте по логину/паролю" do
       VCR.use_cassette('test_api', 
-                     # :record => :new_episodes,
                      :allow_playback_repeats => true) do
-        @api.getUserInfo['user_id'].should_not be_nil
+        @api, @pages = VkTools.authorize("nikolay_vasilev_1997@mail.ru", "rfvtgb123")
+        @api.getUserInfoEx['user_id'].should_not be_nil
       end
       @api.to_hash[:access_token].should_not be_empty
       @pages.to_hash[:cookie].to_s.should_not be_empty
@@ -97,15 +96,13 @@ describe VkTools do
 
   describe "Connection error" do
     before(:each) do
-      @token = ""
-      @api = VkTools::Api.new :access_token => @token
+      @api = VkTools::Api.new :access_token => ""
       @pages = VkTools::Pages.new :cookie => ""
-      @vcr_cassette = "test_connection_error"
     end
 
     it "should process auth error" do
       lambda {
-        VCR.use_cassette(@vcr_cassette, :record => :new_episodes) do
+        VCR.use_cassette("test_connection_error") do
           @api.getUserInfo!
         end
       }.should raise_error(VkTools::UserAuthFailed)
