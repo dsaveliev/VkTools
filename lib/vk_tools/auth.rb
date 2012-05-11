@@ -77,8 +77,7 @@ module VkTools::Auth
         :display      => 'wap'
       )
       agent = Mechanize.new
-      # agent.http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-      
+      agent.idle_timeout = 0.5
       auth_data = nil
 
       begin
@@ -86,27 +85,18 @@ module VkTools::Auth
         login_form = login_page.forms.first
         login_form.email = login
         login_form.pass  = password
-        
         verify_page = login_form.submit
         
-        # if verify_page.uri.path == '/oauth/authorize'
-        #   if /m=4/.match(verify_page.uri.query)
-        #     raise VkTools::ResponseError, "Authentification problem"
-        #   elsif /s=1/.match(verify_page.uri.query)
-        #     grant_access_page = verify_page.forms.first.submit
-        #   end
-        # else
-        #   grant_access_page = verify_page
-        # end
-        # 
-        # code = grant_access_page.uri.to_s[/.*code=(.*)&?.*/, 1]
-
         code_regexp = /.*code=(.*)&?.*/
 
-        if not code_regexp.match(verify_page.uri.to_s)
-          errmsg = "Wrong login and/or password"
-          MproLogger.mlog(errmsg)
-          return errmsg
+        unless code_regexp.match(verify_page.uri.to_s)
+          verify_form = verify_page.forms.first
+          verify_page = verify_form.submit
+          unless code_regexp.match(verify_page.uri.to_s)
+            errmsg = "Wrong login and/or password"
+            log(errmsg)
+            return []
+          end
         end
 
         code = verify_page.uri.to_s[/.*code=(.*)&?.*/, 1]
